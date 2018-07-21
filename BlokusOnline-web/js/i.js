@@ -2,7 +2,8 @@
 //     alert('yes');
 // }
 
-function Chess(model, rotationFlag, symmetryFlag) {
+function Chess(color ,model, rotationFlag, symmetryFlag) {
+    this.color = color;
     this.model = model;
     this.rotationFlag = rotationFlag;
     this.symmetryFlag = symmetryFlag;
@@ -55,17 +56,50 @@ function formChooseChess(chess) {
 
 }
 
+
+
+function initChooseChessByColor(color) {
+    var model1 = new Array(5);
+    model1[0] = [0, 0, 0, 0, 0];
+    model1[1] = [0, 0, 1, 0, 0];
+    model1[2] = [0, 1, 1, 1, 0];
+    model1[3] = [0, 0, 1, 0, 0];
+    model1[4] = [0, 0, 1, 0, 0];
+    var chess1 = new Chess(color,model1, 0, 0);
+    formChooseChess(chess1);
+
+    var model2 = new Array(5);
+    model2[0] = [0, 0, 0, 0, 0];
+    model2[1] = [0, 0, 0, 0, 0];
+    model2[2] = [0, 1, 1, 1, 0];
+    model2[3] = [0, 0, 1, 0, 0];
+    model2[4] = [0, 0, 0, 0, 0];
+    var chess2 = new Chess(color,model2, 0, 0);
+    formChooseChess(chess2);
+
+    var model3 = new Array(5);
+    model3[0] = [0, 0, 0, 0, 0];
+    model3[1] = [0, 0, 1, 0, 0];
+    model3[2] = [0, 1, 1, 0, 0];
+    model3[3] = [0, 0, 1, 0, 0];
+    model3[4] = [0, 0, 0, 0, 0];
+    var chess3 = new Chess(color,model3, 0, 0);
+    formChooseChess(chess3);
+
+    var model4 = new Array(5);
+    model4[0] = [0, 0, 0, 0, 0];
+    model4[1] = [0, 0, 1, 0, 0];
+    model4[2] = [0, 1, 1, 0, 0];
+    model4[3] = [0, 0, 1, 0, 0];
+    model4[4] = [0, 0, 0, 0, 0];
+    var chess4 = new Chess(color,model4, 0, 0);
+    formChooseChess(chess4);
+}
+
 $(function () {
+    //网页加载完调用的方法
     initChessBoard();
+    initChooseChessByColor(1);
 
-
-    var model = new Array(5);
-    model[0] = [0, 0, 0, 0, 0];
-    model[1] = [0, 0, 1, 0, 0];
-    model[2] = [0, 1, 1, 1, 0];
-    model[3] = [0, 0, 1, 0, 0];
-    model[4] = [0, 0, 0, 0, 0];
-    var chess = new Chess(model, 0, 0);
-    formChooseChess(chess);
 });
 

@@ -13,7 +13,7 @@ body {
 }
 
 .content-main {
-    width: 1150px;
+    width: 1350px;
     height: 840px;
     margin: 0 auto;
 }
@@ -44,7 +44,7 @@ body {
 
 .content-right {
     width: 230px;
-    /*height: 840px;*/
+    /*height: 140px;*/
     border: 1px solid green;
     background-color: white;
     margin-left: 25px;
@@ -53,6 +53,19 @@ body {
 
 }
 
+
+/*.content-left {*/
+    /*width: 150px;*/
+    /*height: 640px;*/
+    /*border: 1px solid green;*/
+    /*background-color: white;*/
+    /*margin-right: 25px;*/
+    /*float: bottom ;*/
+    /*padding: 10px;*/
+    /*margin-top: 250px;*/
+
+/*}*/
+
 .choose-chess {
     width: 210px;
     height: 210px;
@@ -60,4 +73,34 @@ body {
     background-color: cornflowerblue;
     /*margin-left: 25px;*/
     margin: 10PX auto;
+}
+
+
+/*.button-rotation{*/
+    /*background-color: #4CAF50; !* Green *!*/
+    /*border: none;*/
+    /*color: white;*/
+    /*padding: 15px 32px;*/
+    /*text-align: center;*/
+    /*text-decoration: none;*/
+    /*display: inline-block;*/
+    /*font-size: 16px;*/
+/*}*/
+
+.button-custom{
+    /*background-color: #4CAF50; !* Green *!*/
+    border: none;
+    color: royalblue;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    margin-right: 25px;
+}
+
+.button-custom:hover {
+    background-color: mediumslateblue; /* Green */
+    color: darkslategray;
 }
