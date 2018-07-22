@@ -14,7 +14,7 @@ function clickChooseChess(chessName) {
 }
 
 function lose() {
-    blokusUIController.lose(1);
+    blokusUIController.lose(blokusUIController.blokusController.currentColor);
 }
 
 function chessDown($this) {

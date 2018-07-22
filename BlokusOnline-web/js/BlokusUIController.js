@@ -8,8 +8,8 @@ function BlokusUIController() {
 
     this.formChooseChess = function (chess) {
         var contentRight = $('.content-right-' + chess.color);
-        var symmetryNode = $('<div id="' + 'symmetry' + chess.name + '"></div>');
-        var chooseChess = $('<div id="' + 'rotation' + chess.name + '"  class="choose-chess-button" onclick="clickChooseChess(\'' + chess.name + '\')"></div>');
+        var symmetryNode = $('<div id="' + 'symmetry' + chess.name + '"  ></div>');
+        var chooseChess = $('<div id="' + 'rotation' + chess.name + '" class="choose-chess-button" onclick="clickChooseChess(\'' + chess.name + '\')"></div>');
         for (var i = 0; i < 5; i++) {
             for (var j = 0; j < 5; j++) {
                 if (chess.model[i][j] == 1) {
@@ -95,9 +95,34 @@ function BlokusUIController() {
         this.blokusController = new BlokusController(map);
     };
 
+    this.frameUpdate = function () {
 
+        if (this.blokusUIController.deadline < 0) {
+            if (this.blokusUIController.blokusController.loseCount >= MAX_PLAYERS_COUNT - 1) {
+                // this.blokusUIController.deadline = this.blokusUIController.defaulDeadline;
+                $('.time-box').text(0);
+                return;
+            }
+            alert(this.blokusUIController.blokusController.currentColor + ' lose');
+            this.blokusUIController.lose(this.blokusUIController.blokusController.currentColor);
+            $('.time-box').text(this.blokusUIController.deadline--);
+
+        } else {
+            $('.time-box').text(this.blokusUIController.deadline--);
+
+        }
+
+    };
+
+    this.formDeadlineController = function () {
+        return window.setInterval(this.frameUpdate, 1000);
+    };
+
+    this.defaulDeadline = 15;
+    this.deadline = this.defaulDeadline;
     this.currentChessName = '';
     this.blokusController = null;
+    this.deadlineController = this.formDeadlineController();
     this.start();
 
 
@@ -136,6 +161,7 @@ function BlokusUIController() {
         var model = chess.model;
         var nextColor = blokusControllerJudgeResult.nextColor;
         if (blokusJudgeResult.result) {
+            this.deadline = this.defaulDeadline;
             this.formChessAfterDown(x, y, model, chess.color);
             this.showChoosePanel(nextColor);
             $('#symmetry' + chess.name).addClass('custom-hide');
@@ -166,10 +192,9 @@ function BlokusUIController() {
     };
 
     this.lose = function (color) {
-
-
-        var nextColor = this.blokusController.lose( this.blokusController.currentColor);
+        var nextColor = this.blokusController.lose(color);
         this.showChoosePanel(nextColor);
+        this.deadline = this.defaulDeadline;
     };
 
 
