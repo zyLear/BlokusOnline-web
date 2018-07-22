@@ -19,30 +19,50 @@
 </div>
 <div class="page-main">
     <div class="content-main">
-        <!--<div class="content-left">-->
-            <!--<button class="button-custom">旋转</button>-->
-            <!--<button class="button-custom">对称</button>-->
-        <!--</div>-->
+        <div class="content-left">
+            <div class="time-box">
+                <div >时间</div>
+            </div>
+            <button class="button-custom" onclick="symmetry()">对称</button>
+            <button class="button-custom" onclick="rotation()">旋转</button>
+        </div>
 
         <div class="chessboard"></div>
-
-        <div class="content-right">
-
-            <!--<div class="choose-chess"></div>-->
-            <!--<div class="choose-chess"></div>-->
-            <!--<div class="choose-chess"></div>-->
+        <input name="content-right-radio" id="content-right-radio-1" checked="checked" type="radio" class="custom-hide"/>
+        <div class="content-right-1">
         </div>
-        <div class="content-left">
-            <button class="button-custom">旋转</button>
-            <button class="button-custom">对称</button>
+        <input name="content-right-radio" id="content-right-radio-2" type="radio" class="custom-hide"/>
+        <div class="content-right-2">
         </div>
+        <input name="content-right-radio" id="content-right-radio-3" type="radio" class="custom-hide"/>
+        <div class="content-right-3">
+        </div>
+        <input name="content-right-radio" id="content-right-radio-4" type="radio" class="custom-hide"/>
+        <div class="content-right-4">
+        </div>
+
+
+
+        <!--<div class="content-left">-->
+        <!--<button class="button-custom" onclick="rotation()">旋转</button>-->
+        <!--<button class="button-custom">对称</button>-->
+        <!--</div>-->
+
+        <!--<lable class="custom-hide" for="content-right-radio-1"></lable>-->
+        <!--<lable class="custom-hide" for="content-right-radio-2"></lable>-->
+        <!--<lable class="custom-hide" for="content-right-radio-3"></lable>-->
+        <!--<lable class="custom-hide" for="content-right-radio-4"></lable>-->
     </div>
 </div>
 
 
 <!--<script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>-->
 <script src="vendor/jquery190.min.js"></script>
-<script src="js/i.js"></script>
+<!--<script src="js/two.js"></script>-->
+<script src="js/BlokusCore.js"></script>
+<script src="js/BlokusController.js"></script>
+<script src="js/BlokusUIController.js"></script>
+<script src="js/BlokusBootstrap.js"></script>
 
 </body>
 

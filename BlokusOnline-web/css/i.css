@@ -24,6 +24,7 @@ body {
     border: 2px solid red;
     margin: 0 auto;
     float: left;
+    background-color: lightsteelblue;
 }
 
 .chess-box {
@@ -42,65 +43,196 @@ body {
     background-color: green;
 }
 
-.content-right {
+.chess-1 {
+    /*padding: -1px;*/
+    border-radius: 7px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid blue;
+    background-color: blue;
+}
+
+.chess-2 {
+    /*padding: -1px;*/
+    border-radius: 7px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid green;
+    background-color: green;
+}
+
+.chess-3 {
+    /*padding: -1px;*/
+    border-radius: 7px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid red;
+    background-color: red;
+}
+
+.chess-4 {
+    /*padding: -1px;*/
+    border-radius: 7px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid yellow;
+    background-color: yellow;
+}
+
+.custom-hide{
+    display: none;
+}
+
+input:checked + div{
+    display: block;
+}
+
+
+.content-right-1 {
     width: 230px;
-    /*height: 140px;*/
+    min-height: 840px;
     border: 1px solid green;
     background-color: white;
     margin-left: 25px;
-    float: left ;
+    float: left;
     margin-bottom: 100px;
+    display: none;
+}
+
+.content-right-2 {
+    width: 230px;
+    min-height: 840px;
+    border: 1px solid green;
+    background-color: white;
+    margin-left: 25px;
+    float: left;
+    margin-bottom: 100px;
+    display: none;
+}
+
+.content-right-3 {
+    width: 230px;
+    min-height: 840px;
+    border: 1px solid green;
+    background-color: white;
+    margin-left: 25px;
+    float: left;
+    margin-bottom: 100px;
+    display: none;
+}
+
+.content-right-4 {
+    width: 230px;
+    min-height: 840px;
+    border: 1px solid green;
+    background-color: white;
+    margin-left: 25px;
+    float: left;
+    margin-bottom: 100px;
+    display: none;
+}
+
+.content-left {
+    width: 150px;
+    /*height: 640px;*/
+    border: 1px solid green;
+    background-color: white;
+    margin-right: 25px;
+    padding: 10px;
+    margin-top: 250px;
+
+    float: left;
 
 }
 
-
-/*.content-left {*/
-    /*width: 150px;*/
-    /*height: 640px;*/
-    /*border: 1px solid green;*/
-    /*background-color: white;*/
-    /*margin-right: 25px;*/
-    /*float: bottom ;*/
-    /*padding: 10px;*/
-    /*margin-top: 250px;*/
-
-/*}*/
-
-.choose-chess {
+.choose-chess-button {
     width: 210px;
     height: 210px;
     border: 1px solid green;
-    background-color: cornflowerblue;
+    background-color: lightsteelblue;
     /*margin-left: 25px;*/
-    margin: 10PX auto;
+    margin: 10px auto;
+    /*-webkit-animation: spin 2s linear infinite;*/
+    /*animation: spin 2s linear infinite;*/
 }
 
-
 /*.button-rotation{*/
-    /*background-color: #4CAF50; !* Green *!*/
-    /*border: none;*/
-    /*color: white;*/
-    /*padding: 15px 32px;*/
-    /*text-align: center;*/
-    /*text-decoration: none;*/
-    /*display: inline-block;*/
-    /*font-size: 16px;*/
+/*background-color: #4CAF50; !* Green *!*/
+/*border: none;*/
+/*color: white;*/
+/*padding: 15px 32px;*/
+/*text-align: center;*/
+/*text-decoration: none;*/
+/*display: inline-block;*/
+/*font-size: 16px;*/
 /*}*/
 
-.button-custom{
+.button-custom {
     /*background-color: #4CAF50; !* Green *!*/
     border: none;
     color: royalblue;
-    padding: 15px 32px;
+    padding: 15px 35px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 10px;
-    margin-right: 25px;
+    margin: 12px;
+    margin-right: 28px;
+    font-family:Verdana,Genva,Arial,sans-serif;
+    font-size:20px;
+    font-style: inherit;
+    /*font-weight:bold;*/
+    font-weight:bold;
+
 }
 
+.time-box{
+    font-size:1.2em;
+    text-align: center;
+    width: 100%;
+    border: 1px solid red;
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight:bold;
+}
 .button-custom:hover {
     background-color: mediumslateblue; /* Green */
     color: darkslategray;
+}
+
+[rotation=custom-rotation-0] {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
+[rotation=custom-rotation-1] {
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+[rotation=custom-rotation-2] {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+[rotation=custom-rotation-3] {
+    -webkit-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+[symmetry=custom-symmetry-0] {
+    /*-webkit-transform: scale(-1,1);*/
+    /*-o-transform: scale(-1,1);*/
+    /*transform: scale(-1,1);*/
+}
+
+[symmetry=custom-symmetry-1] {
+    -webkit-transform: scale(-1,1);
+    -o-transform: scale(-1,1);
+    transform: scale(-1,1);
 }
