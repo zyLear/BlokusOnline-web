@@ -1,7 +1,6 @@
-function BlokusControllerJudgeResult(blokusJudgeResult, chess, nextColor) {
+function BlokusControllerJudgeResult(blokusJudgeResult, chess) {
     this.blokusJudgeResult = blokusJudgeResult;
     this.chess = chess;
-    this.nextColor = nextColor;
 }
 
 function BlokusController(chessMap) {
@@ -40,20 +39,18 @@ function BlokusController(chessMap) {
             var blokusParam = new BlokusParam(x, y, this.allChess, currentChess.model, currentChess.color);
             var blokusJudgeResult = judge(blokusParam);
             if (blokusJudgeResult.result) {
-                var x = blokusJudgeResult.x;
-                var y = blokusJudgeResult.y;
-                var model = currentChess.model;
-                var color = currentChess.color;
-                this.updateChess(x, y, model, color);
-                this.currentColor = this.getNextColor(this.currentColor);
-                this.currentChessName = '';
-                return new BlokusControllerJudgeResult(blokusJudgeResult, currentChess, this.currentColor);
+                return new BlokusControllerJudgeResult(blokusJudgeResult, currentChess);
             } else {
                 return null;
             }
         }
     };
 
+
+    this.chessDone = function (x, y, model, color) {
+        this.updateChess(x, y, model, color);
+        this.currentColor = this.getNextColor(this.currentColor);
+    };
 
     this.getNextColor = function (color) {
         if (this.loseCount >= MAX_PLAYERS_COUNT) {
