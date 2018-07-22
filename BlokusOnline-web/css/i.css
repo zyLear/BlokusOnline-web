@@ -171,15 +171,31 @@ input:checked + div{
     /*background-color: #4CAF50; !* Green *!*/
     border: none;
     color: royalblue;
-    padding: 15px 32px;
+    padding: 15px 35px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 10px;
-    margin-right: 25px;
+    margin: 12px;
+    margin-right: 28px;
+    font-family:Verdana,Genva,Arial,sans-serif;
+    font-size:20px;
+    font-style: inherit;
+    /*font-weight:bold;*/
+    font-weight:bold;
+
 }
 
+.time-box{
+    font-size:1.2em;
+    text-align: center;
+    width: 100%;
+    border: 1px solid red;
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight:bold;
+}
 .button-custom:hover {
     background-color: mediumslateblue; /* Green */
     color: darkslategray;

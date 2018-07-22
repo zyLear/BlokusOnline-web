@@ -47,24 +47,28 @@ function BlokusUIController() {
         this.formChooseChess(chess2);
         chessMap.set(name2, chess2);
 
-        // var model3 = new Array(5);
-        // model3[0] = [0, 0, 0, 0, 0];
-        // model3[1] = [0, 0, 1, 0, 0];
-        // model3[2] = [0, 1, 1, 0, 0];
-        // model3[3] = [0, 0, 1, 0, 0];
-        // model3[4] = [0, 0, 0, 0, 0];
-        // var chess3 = new Chess(color, model3, 0, 0);
-        // formChooseChess(chess3);
-        //
-        // var model4 = new Array(5);
-        // model4[0] = [0, 0, 0, 0, 0];
-        // model4[1] = [0, 0, 1, 0, 0];
-        // model4[2] = [0, 1, 1, 0, 0];
-        // model4[3] = [0, 0, 1, 0, 0];
-        // model4[4] = [0, 0, 0, 0, 0];
-        // var chess4 = new Chess(color, model4, 0, 0);
-        // formChooseChess(chess4);
-        // chessMap = map;
+        var model3 = new Array(5);
+        model3[0] = [0, 0, 0, 0, 0];
+        model3[1] = [0, 0, 1, 0, 0];
+        model3[2] = [0, 1, 1, 0, 0];
+        model3[3] = [0, 0, 0, 0, 0];
+        model3[4] = [0, 0, 0, 0, 0];
+        var name3 = color + '_' + 3;
+        var chess3 = new Chess(name3, color, model3, 0, 0);
+        this.formChooseChess(chess3);
+        chessMap.set(name3, chess3);
+
+        var model4 = new Array(5);
+        model4[0] = [0, 0, 0, 0, 0];
+        model4[1] = [0, 0, 1, 0, 0];
+        model4[2] = [0, 1, 1, 0, 0];
+        model4[3] = [0, 0, 1, 1, 0];
+        model4[4] = [0, 0, 0, 0, 0];
+        var name4 = color + '_' + 4;
+        var chess4 = new Chess(name4, color, model4, 0, 0);
+        this.formChooseChess(chess4);
+        chessMap.set(name4, chess4);
+
     };
 
 
