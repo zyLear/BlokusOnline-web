@@ -102,4 +102,27 @@ function BlokusController(chessMap) {
     };
 
 
+    this.lose = function (color) {
+        if (this.loseCount == MAX_PLAYERS_COUNT - 1) {
+            //color赢啦
+            return this.currentColor;
+        }
+        if (this.loseColor[color] == 1) {
+            //color已经输了，不能再输
+            return this.currentColor;
+        }
+
+        this.loseCount++;
+        this.loseColor[color] = 1;
+
+        // if (this.currentColor <= color) {
+        //     firstFour--;
+        // }
+        if (color == this.currentColor) {
+            this.currentColor = this.getNextColor(color);
+        }
+        return this.currentColor
+    }
+
+
 }

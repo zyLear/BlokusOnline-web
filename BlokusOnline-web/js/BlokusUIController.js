@@ -133,22 +133,19 @@ function BlokusUIController() {
         var nextColor = blokusControllerJudgeResult.nextColor;
         if (blokusJudgeResult.result) {
             this.formChessAfterDown(x, y, model, chess.color);
-            $('[name=content-right-radio]').each(function () {
-                if (this.id == ('content-right-radio-' + nextColor)) {
-                    $(this).prop('checked', 'checked');
-                } else {
-                    $(this).removeProp('checked');
-                }
-            });
-
+            this.showChoosePanel(nextColor);
             $('#symmetry' + chess.name).addClass('custom-hide');
-
-            // $('input[name="content-right-radio"]').each(function () {
-            //     alert(this.id);
-            //     alert('nextColor:  '+('content-right-radio-' + nextColor));
-            //
-            // });
         }
+    };
+
+    this.showChoosePanel = function (nextColor) {
+        $('[name=content-right-radio]').each(function () {
+            if (this.id == ('content-right-radio-' + nextColor)) {
+                $(this).prop('checked', 'checked');
+            } else {
+                $(this).removeProp('checked');
+            }
+        });
     };
 
 
@@ -162,6 +159,13 @@ function BlokusUIController() {
                 }
             }
         }
+    };
+
+    this.lose = function (color) {
+
+
+        var nextColor = this.blokusController.lose( this.blokusController.currentColor);
+        this.showChoosePanel(nextColor);
     };
 
 
