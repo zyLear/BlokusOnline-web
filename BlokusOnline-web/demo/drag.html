@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HTML5实现的拖拽效果</title>
+    <style>
+        #boxA, #boxB {
+            float:left;
+            width:200px;
+            height: 300px;
+            padding:10px; margin:10px;
+        }
+
+        #boxA { background-color: chartreuse; }
+        #boxB { background-color: chartreuse; }
+
+
+        #drag, #drag2, #drag3,#drag4,#drag5,#drag6 {
+            width:85px; height:28px; padding:5px; margin:5px;
+        }
+        #drag { background-color: slateblue;}
+        #drag2 { background-color:deeppink;}
+        #drag3 { background-color: orangered;}
+        #drag4 { background-color: sandybrown;}
+        #drag5 { background-color: #f0c040;}
+        #drag6 { background-color: purple;}
+    </style>
+</head>
+<body>
+<div style="text-align: center;font-weight: 600;font-size: 20px" id="boxA" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+    <div id="drag" draggable="true" ondragstart="drag(event)">效果一</div>
+
+    <div id="drag2" draggable="true" ondragstart="drag(event)">效果二</div>
+
+    <div id="drag3" draggable="true" ondragstart="drag(event)">效果三</div>
+
+</div>
+
+<div style="text-align: center;font-weight: 600;font-size: 20px" id="boxB" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+    <div id="drag4" draggable="true" ondragstart="drag(event)">效果1</div>
+
+    <div id="drag5" draggable="true" ondragstart="drag(event)">效果2</div>
+
+    <div id="drag6" draggable="true" ondragstart="drag(event)">效果3</div>
+
+</div>
+
+<script>
+    function allowDrop(ev){
+        ev.preventDefault();//阻止默认行为
+    }
+    function drag(ev){
+        ev.dataTransfer.setData("pic",ev.target.id);//拖拽时设置数据
+    }
+    function drop(ev){
+        ev.preventDefault();//阻止默认行为
+// alert(ev.target);
+        var data=ev.dataTransfer.getData("pic");//获取设置的内容
+        ev.target.appendChild(document.getElementById(data));//将获取的内容添加到当前
+    }
+</script>
+
+</body>
+</html>
