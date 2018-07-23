@@ -53,6 +53,42 @@ function MessageBean(msgType, content) {
 
 function WebSocketClient(networkManager) {
     this.networkManager = networkManager;
+    this.ws = undefined;
+
+    this.connect = function () {
+        if (ws != undefined) {
+            return;
+        }
+
+        ws = new WebSocket("ws://localhost:19090/ws");
+
+        ws.onopen = function () {
+            alert("连接成功");
+            console.log('connected');
+            setInterval("ping()", 15000);
+        };
+
+
+        ws.onmessage = function (evt) {
+            var received_msg = evt.data;
+            // alert("数据已接收...");
+            console.log("receive from server:" + received_msg);
+
+            this.networkManager.handleMessage(1);
+
+        };
+
+        ws.onclose = function () {
+            // 关闭 websocket
+            alert("连接已关闭...");
+        };
+
+    };
+
+
+    function ping() {
+        ws.send('{"msgType":"ping","content":""}')
+    }
 
 
 }
@@ -62,15 +98,21 @@ function NetworkManager(gameUIController, blokusUIController) {
     this.blokusUIController = blokusUIController;
 
     this.handleMessage = function (messageBean) {
+        var responses;
         switch (messageBean.msgType) {
             case MsgType.CHESS_DONE:
-                return this.chessDone(messageBean);
+                responses = this.chessDone(messageBean);
+                break;
         }
+
+
     };
+
+
 
     this.chessDone = function (messageBean) {
         var object = JSON.parse(messageBean.content);
-        object.x
+        blokusUIController.chessDone(object.x, object.y, object.model, object.chessName);
     };
 
 

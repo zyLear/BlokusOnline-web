@@ -10,6 +10,7 @@ var yellow = 4;
 
 
 function Chess(name, color, model, rotationFlag, symmetryFlag) {
+
     this.name = name;
     this.color = color;
     this.model = model;
