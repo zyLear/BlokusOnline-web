@@ -108,7 +108,7 @@ function NetworkManager(gameUIController, blokusUIController) {
 
     };
 
-    this
+
 
     this.chessDone = function (messageBean) {
         var object = JSON.parse(messageBean.content);
