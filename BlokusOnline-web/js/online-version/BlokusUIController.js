@@ -10,10 +10,9 @@ function BlokusUIController() {
         var contentRight = $('.content-right-' + chess.color);
         var symmetryNode = $('<div id="symmetry' + chess.name + '"  ></div>');
         var chooseChess = $('<div id="rotation' + chess.name + '" onmousedown="clickChooseChess(\'' + chess.name + '\')"></div>');
-
         var emptyDiv = $('<div class="choose-chess-button" ></div>');
 
-        var doubleWidthDiv = $('<div style="width: 422px;" ></div>');
+        var doubleWidthDiv = $('<div style="width: 422px;" ></div>')
 
         var backDiv = $('<div style="width: 210px;float: left"></div>');
         var frontDiv = $('<div id="front' + chess.name + '" class="choose-chess-button-hide"></div>');
@@ -30,16 +29,12 @@ function BlokusUIController() {
         }
 
 
-        chooseChess.append(frontDiv);
-        symmetryNode.append(chooseChess);
-
         doubleWidthDiv.append(backDiv);
-        doubleWidthDiv.append(symmetryNode);
+        doubleWidthDiv.append(frontDiv);
         emptyDiv.append(doubleWidthDiv);
-
-
-
-        contentRight.append(emptyDiv);
+        chooseChess.append(emptyDiv);
+        symmetryNode.append(chooseChess);
+        contentRight.append(symmetryNode);
     };
 
     this.initChooseChessByColor = function (chessMap, color) {
@@ -152,7 +147,7 @@ function BlokusUIController() {
     this.clickChooseChess = function (chessName) {
         this.isMove = true;
         this.currentChessName = chessName;
-        var obj = $('#front' + this.currentChessName);
+        var obj = $('#symmetry' + this.currentChessName);
         obj.css('position', 'absolute');
         this.abs_x = obj.width() / 2;
         this.abs_y = obj.height() / 2;
@@ -160,7 +155,7 @@ function BlokusUIController() {
 
     this.moving = function (x, y) {
         if (this.isMove) {
-            var obj = $('#front' + this.currentChessName);
+            var obj = $('#symmetry' + this.currentChessName);
             obj.css({
                 'left': x - this.abs_x,
                 'top': y - this.abs_y
@@ -170,7 +165,7 @@ function BlokusUIController() {
 
     this.mouseUp = function (x, y) {
         this.isMove = false;
-        var obj = $('#front' + this.currentChessName);
+        var obj = $('#symmetry' + this.currentChessName);
         // obj.css({
         //     'position': 'relative',
         //     'left': '-210px',
