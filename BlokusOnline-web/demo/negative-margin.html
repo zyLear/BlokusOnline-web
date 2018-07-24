@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+        .box0  {
+            /* 子容器比父容器的宽度多 17 px, 经测正好是滚动条的默认宽度 */
+            width: 500px;
+            height: 300px;
+            line-height: 30px;
+            text-align: center;
+            /*overflow-y: scroll;*/
+            border: 1px solid black;
+            background-color: black;
+
+            /*margin-top: -302px;*/
+        }
+
+        .box  {
+            /* 子容器比父容器的宽度多 17 px, 经测正好是滚动条的默认宽度 */
+            width: 500px;
+            height: 300px;
+            line-height: 30px;
+            text-align: center;
+            /*overflow-y: scroll;*/
+            border: 1px solid black;
+            background-color: #52CCCC;
+
+            margin-top: -302px;
+
+            /*-webkit-transform: rotate(90deg);*/
+            /*-ms-transform: rotate(90deg);*/
+            /*transform: rotate(90deg);*/
+        }
+
+        div.aa {
+            position: absolute;
+            left: 400px;
+            top: 400px;
+            width: 500px;
+            height: 300px;
+            background-color: black;
+            /*overflow: hidden;*/
+        }
+    </style>
+
+</head>
+<body>
+<div class="aa">
+    <div class="box0">
+        你好 </br>你好 </br>
+        你好 </br>你好 </br>
+    </div>
+    <div class="box">
+        你好 </br>你好 </br>
+        你好 </br>你好 </br>
+        <div style="width: 150px;height: 150px;background-color: aliceblue">
+            testsetset
+        </div>
+
+    </div>
+</div>
+
+
+<!--<div class="box">-->
+    <!--你好 </br>你好 </br>-->
+    <!--你好 </br>你好 </br>-->
+</div>
+
+
+
+</body>
+</html>
