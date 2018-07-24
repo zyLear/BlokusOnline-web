@@ -189,14 +189,15 @@ input:checked + div {
 }
 
 .choose-chess-button-relative {
-    /*position: relative;*/
+    position: relative;
     width: 210px;
     height: 210px;
-    /*background-color: transparent;*/
-    /*top: -0px;*/
-    margin-top: -212px;
-    background-color: #666666;
-    /*float: left*/
+    background-color: transparent;
+    top: -0px;
+    /*margin-top: -212px;*/
+    /*background-color: chocolate;*/
+    left: -210px;
+    float: left
 }
 
 .chess-choose-box {

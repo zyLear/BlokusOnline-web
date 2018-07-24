@@ -15,13 +15,13 @@ function BlokusUIController() {
 
         var emptyDiv = $('<div class="choose-chess-button" ></div>');
 
-        // var doubleWidthDiv = $('<div style="width: 422px;" ></div>');
+        var doubleWidthDiv = $('<div style="width: 422px;" ></div>');
         //
-        var backDiv = $('<div class="chess-choose-box"></div>'); //float: left
+        var backDiv = $('<div class="chess-choose-box" style="float: left"></div>'); //float: left
 
         // var frontDiv = $('<div id="front' + chess.name + '" class="choose-chess-button-relative"></div>');
 
-        var relativeDiv = $('<div class="choose-chess-button-relative">sadfsdf</div>');
+        var relativeDiv = $('<div class="choose-chess-button-relative"></div>');
 
         var combineDiv = $('<div id="combine' + chess.name + '" ></div>');
 
@@ -57,13 +57,16 @@ function BlokusUIController() {
 
         // relativeDiv.append('<div>tttttttttttttttttttttt</div>');
 
-        emptyDiv.append(backDiv);
-        emptyDiv.append(relativeDiv);
-        // emptyDiv.append(combineDiv);
+        doubleWidthDiv.append(backDiv);
+        doubleWidthDiv.append(relativeDiv);
+        relativeDiv.append(combineDiv);
 
 
         // rotationNode.append(emptyDiv);
         // symmetryNode.append(rotationNode);
+        emptyDiv.append(doubleWidthDiv);
+        // emptyDiv.append(combineDiv);
+
         contentRight.append(emptyDiv);
     };
 
@@ -178,6 +181,7 @@ function BlokusUIController() {
         this.isMove = true;
         this.currentChessName = chessName;
         var obj = $('#combine' + this.currentChessName);
+        obj.css('position', '');
         obj.css('position', 'absolute');
         this.abs_x = obj.width() / 2;
         this.abs_y = obj.height() / 2;
