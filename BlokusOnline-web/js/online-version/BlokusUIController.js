@@ -44,29 +44,15 @@ function BlokusUIController() {
         rotationNode.append(frontChessDiv);
         symmetryNode.append(rotationNode);
         combineDiv.append(symmetryNode);
-        // relativeDiv.append(relEmp);
 
 
-        // doubleWidthDiv.append(backDiv);
-        // doubleWidthDiv.append(relativeDiv);
-
-        // doubleWidthDiv.append(frontDiv);
-
-
-        // emptyDiv.append(doubleWidthDiv);
-
-        // relativeDiv.append('<div>tttttttttttttttttttttt</div>');
 
         doubleWidthDiv.append(backDiv);
         doubleWidthDiv.append(relativeDiv);
         relativeDiv.append(combineDiv);
 
 
-        // rotationNode.append(emptyDiv);
-        // symmetryNode.append(rotationNode);
         emptyDiv.append(doubleWidthDiv);
-        // emptyDiv.append(combineDiv);
-
         contentRight.append(emptyDiv);
     };
 
@@ -181,8 +167,9 @@ function BlokusUIController() {
         this.isMove = true;
         this.currentChessName = chessName;
         var obj = $('#combine' + this.currentChessName);
-        obj.css('position', '');
-        obj.css('position', 'absolute');
+    // $('.choose-chess-button-relative').css('position')
+        // obj.css('position', '');
+        obj.css('position', 'fixed');
         this.abs_x = obj.width() / 2;
         this.abs_y = obj.height() / 2;
     };

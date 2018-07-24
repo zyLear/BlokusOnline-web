@@ -110,6 +110,7 @@ input:checked + div {
     float: left;
     margin-bottom: 100px;
     display: none;
+    overflow: scroll;
 }
 
 .content-right-2 {
@@ -121,6 +122,7 @@ input:checked + div {
     float: left;
     margin-bottom: 100px;
     display: none;
+    overflow: scroll;
 }
 
 .content-right-3 {
@@ -132,6 +134,7 @@ input:checked + div {
     float: left;
     margin-bottom: 100px;
     display: none;
+    overflow: scroll;
 }
 
 .content-right-4 {
@@ -143,6 +146,7 @@ input:checked + div {
     float: left;
     margin-bottom: 100px;
     display: none;
+    overflow: scroll;
 }
 
 .content-left {
@@ -153,7 +157,6 @@ input:checked + div {
     margin-right: 25px;
     padding: 10px;
     /*margin-top: 250px;*/
-
     float: left;
 
 }
