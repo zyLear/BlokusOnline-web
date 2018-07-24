@@ -34,6 +34,20 @@ body {
     border: 1px solid black;
 }
 
+.chess-box-game {
+    float: left;
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+}
+
+.chess-box-hide{
+    float: left;
+    width: 40px;
+    height: 40px;
+    border: 1px solid transparent;
+}
+
 .chess {
     /*padding: -1px;*/
     border-radius: 7px;
@@ -79,14 +93,13 @@ body {
     background-color: yellow;
 }
 
-.custom-hide{
+.custom-hide {
     display: none;
 }
 
-input:checked + div{
+input:checked + div {
     display: block;
 }
-
 
 .content-right-1 {
     width: 230px;
@@ -156,6 +169,36 @@ input:checked + div{
     /*animation: spin 2s linear infinite;*/
 }
 
+.choose-chess-button-hide {
+    position: relative;
+    width: 210px;
+    height: 210px;
+    /*border: 1px solid green;*/
+    background-color: transparent;
+    top: -0px;
+    left: -210px;
+    float: left
+
+    /*margin-left: 25px;*/
+    /*margin: 10px auto;*/
+    /*-webkit-animation: spin 2s linear infinite;*/
+    /*animation: spin 2s linear infinite;*/
+}
+
+.choose-chess-button-hide0 {
+    position: relative;
+    /*width: 210px;*/
+    /*height: 210px;*/
+    /*border: 1px solid green;*/
+    top: 0px;
+    left: 0px;
+
+    /*margin-left: 25px;*/
+    /*margin: 10px auto;*/
+    /*-webkit-animation: spin 2s linear infinite;*/
+    /*animation: spin 2s linear infinite;*/
+}
+
 /*.button-rotation{*/
 /*background-color: #4CAF50; !* Green *!*/
 /*border: none;*/
@@ -178,24 +221,25 @@ input:checked + div{
     font-size: 16px;
     margin: 12px;
     margin-right: 28px;
-    font-family:Verdana,Genva,Arial,sans-serif;
-    font-size:20px;
+    font-family: Verdana, Genva, Arial, sans-serif;
+    font-size: 20px;
     font-style: inherit;
     /*font-weight:bold;*/
-    font-weight:bold;
+    font-weight: bold;
 
 }
 
-.time-box{
-    font-size:1.2em;
+.time-box {
+    font-size: 1.2em;
     text-align: center;
     width: 100%;
     border: 1px solid red;
     background-color: white;
     padding-top: 10px;
     padding-bottom: 10px;
-    font-weight:bold;
+    font-weight: bold;
 }
+
 .button-custom:hover {
     background-color: mediumslateblue; /* Green */
     color: darkslategray;
@@ -232,7 +276,7 @@ input:checked + div{
 }
 
 [symmetry=custom-symmetry-1] {
-    -webkit-transform: scale(-1,1);
-    -o-transform: scale(-1,1);
-    transform: scale(-1,1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    transform: scale(-1, 1);
 }

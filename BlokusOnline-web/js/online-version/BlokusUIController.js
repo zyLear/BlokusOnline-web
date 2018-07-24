@@ -8,17 +8,31 @@ function BlokusUIController() {
 
     this.formChooseChess = function (chess) {
         var contentRight = $('.content-right-' + chess.color);
-        var symmetryNode = $('<div id="' + 'symmetry' + chess.name + '"  ></div>');
-        var chooseChess = $('<div id="' + 'rotation' + chess.name + '" class="choose-chess-button" onclick="clickChooseChess(\'' + chess.name + '\')"></div>');
+        var symmetryNode = $('<div id="symmetry' + chess.name + '"  ></div>');
+        var chooseChess = $('<div id="rotation' + chess.name + '" onmousedown="clickChooseChess(\'' + chess.name + '\')"></div>');
+        var emptyDiv = $('<div class="choose-chess-button" ></div>');
+
+        var doubleWidthDiv = $('<div style="width: 422px;" ></div>')
+
+        var backDiv = $('<div style="width: 210px;float: left"></div>');
+        var frontDiv = $('<div id="front' + chess.name + '" class="choose-chess-button-hide"></div>');
         for (var i = 0; i < 5; i++) {
             for (var j = 0; j < 5; j++) {
                 if (chess.model[i][j] == 1) {
-                    chooseChess.append('<div  class="chess-box" > <div class="chess-' + chess.color + '"></div></div>')
+                    backDiv.append('<div  class="chess-box" > </div>');
+                    frontDiv.append('<div  class="chess-box-hide" > <div class="chess-' + chess.color + '"></div></div>');
                 } else {
-                    chooseChess.append('<div  class="chess-box"> </div>');
+                    backDiv.append('<div  class="chess-box"> </div>');
+                    frontDiv.append('<div  class="chess-box-hide"> </div>');
                 }
             }
         }
+
+
+        doubleWidthDiv.append(backDiv);
+        doubleWidthDiv.append(frontDiv);
+        emptyDiv.append(doubleWidthDiv);
+        chooseChess.append(emptyDiv);
         symmetryNode.append(chooseChess);
         contentRight.append(symmetryNode);
     };
@@ -76,7 +90,8 @@ function BlokusUIController() {
         var chessboard = $('.chessboard');
         for (var i = 0; i < 20; i++) {
             for (var j = 0; j < 20; j++) {
-                var chess = $('<div class="chess-box" onclick="chessDown(this)"></div>');
+                var chess = $('<div class="chess-box-game" "></div>');
+                //onclick="chessDown(this)
                 var id = j + 'x' + i;
                 chess.attr('id', id);
                 chessboard.append(chess);
@@ -118,17 +133,63 @@ function BlokusUIController() {
         return window.setInterval(this.frameUpdate, 1000);
     };
 
-    this.defaulDeadline = 15;
+    this.defaulDeadline = 1500;
     this.deadline = this.defaulDeadline;
     this.currentChessName = '';
     this.blokusController = null;
     this.deadlineController = this.formDeadlineController();
     this.start();
 
+    this.isMove = false;
+    this.abs_x;
+    this.abs_y;
 
     this.clickChooseChess = function (chessName) {
+        this.isMove = true;
         this.currentChessName = chessName;
+        var obj = $('#symmetry' + this.currentChessName);
+        obj.css('position', 'absolute');
+        this.abs_x = obj.width() / 2;
+        this.abs_y = obj.height() / 2;
     };
+
+    this.moving = function (x, y) {
+        if (this.isMove) {
+            var obj = $('#symmetry' + this.currentChessName);
+            obj.css({
+                'left': x - this.abs_x,
+                'top': y - this.abs_y
+            });
+        }
+    };
+
+    this.mouseUp = function (x, y) {
+        this.isMove = false;
+        var obj = $('#symmetry' + this.currentChessName);
+        // obj.css({
+        //     'position': 'relative',
+        //     'left': '-210px',
+        //     'top': '0px'
+        // });
+
+        obj.removeAttr('style');
+        // obj.removeClass('choose-chess-button-hide');
+        // obj.addClass('choose-chess-button-hide');
+
+        $('.chess-box-game').each(function () {
+            var obj = $(this);
+            var offset = obj.offset();
+            if (x < offset.left + obj.width() && x > offset.left
+                && y < offset.top + obj.height() && y > offset.top) {
+                var xx = this.id.split('x')[0];
+                var yy = this.id.split('x')[1];
+                // blokusUIController.chessDown(x, y);
+                window.blokusUIController.chessDown(xx, yy);
+                return false;
+            }
+        });
+    };
+
 
     this.rotation = function () {
         var rotationFlag = this.blokusController.rotation(this.currentChessName);
