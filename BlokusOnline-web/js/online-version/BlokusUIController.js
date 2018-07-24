@@ -8,33 +8,52 @@ function BlokusUIController() {
 
     this.formChooseChess = function (chess) {
         var contentRight = $('.content-right-' + chess.color);
+
         var symmetryNode = $('<div id="symmetry' + chess.name + '"  ></div>');
-        var chooseChess = $('<div id="rotation' + chess.name + '" onmousedown="clickChooseChess(\'' + chess.name + '\')"></div>');
+
+        var rotationNode = $('<div id="rotation' + chess.name + '" onmousedown="clickChooseChess(\'' + chess.name + '\')"></div>');
+
         var emptyDiv = $('<div class="choose-chess-button" ></div>');
 
-        var doubleWidthDiv = $('<div style="width: 422px;" ></div>')
+        var doubleWidthDiv = $('<div style="width: 422px;" ></div>');
+        //
+        var backDiv = $('<div class="chess-choose-box" style="float: left"></div>'); //float: left
 
-        var backDiv = $('<div style="width: 210px;float: left"></div>');
-        var frontDiv = $('<div id="front' + chess.name + '" class="choose-chess-button-hide"></div>');
+        // var frontDiv = $('<div id="front' + chess.name + '" class="choose-chess-button-relative"></div>');
+
+        var relativeDiv = $('<div class="choose-chess-button-relative"></div>');
+
+        var combineDiv = $('<div id="combine' + chess.name + '" ></div>');
+
+        var frontChessDiv = $('<div class="chess-choose-box"></div>');
+
+
         for (var i = 0; i < 5; i++) {
             for (var j = 0; j < 5; j++) {
                 if (chess.model[i][j] == 1) {
                     backDiv.append('<div  class="chess-box" > </div>');
-                    frontDiv.append('<div  class="chess-box-hide" > <div class="chess-' + chess.color + '"></div></div>');
+                    frontChessDiv.append('<div  class="chess-box-hide" > <div class="chess-' + chess.color + '"></div></div>');
                 } else {
                     backDiv.append('<div  class="chess-box"> </div>');
-                    frontDiv.append('<div  class="chess-box-hide"> </div>');
+                    frontChessDiv.append('<div  class="chess-box-hide"> </div>');
                 }
             }
         }
 
 
+        rotationNode.append(frontChessDiv);
+        symmetryNode.append(rotationNode);
+        combineDiv.append(symmetryNode);
+
+
+
         doubleWidthDiv.append(backDiv);
-        doubleWidthDiv.append(frontDiv);
+        doubleWidthDiv.append(relativeDiv);
+        relativeDiv.append(combineDiv);
+
+
         emptyDiv.append(doubleWidthDiv);
-        chooseChess.append(emptyDiv);
-        symmetryNode.append(chooseChess);
-        contentRight.append(symmetryNode);
+        contentRight.append(emptyDiv);
     };
 
     this.initChooseChessByColor = function (chessMap, color) {
@@ -147,15 +166,17 @@ function BlokusUIController() {
     this.clickChooseChess = function (chessName) {
         this.isMove = true;
         this.currentChessName = chessName;
-        var obj = $('#symmetry' + this.currentChessName);
-        obj.css('position', 'absolute');
+        var obj = $('#combine' + this.currentChessName);
+    // $('.choose-chess-button-relative').css('position')
+        // obj.css('position', '');
+        obj.css('position', 'fixed');
         this.abs_x = obj.width() / 2;
         this.abs_y = obj.height() / 2;
     };
 
     this.moving = function (x, y) {
         if (this.isMove) {
-            var obj = $('#symmetry' + this.currentChessName);
+            var obj = $('#combine' + this.currentChessName);
             obj.css({
                 'left': x - this.abs_x,
                 'top': y - this.abs_y
@@ -165,7 +186,7 @@ function BlokusUIController() {
 
     this.mouseUp = function (x, y) {
         this.isMove = false;
-        var obj = $('#symmetry' + this.currentChessName);
+        var obj = $('#combine' + this.currentChessName);
         // obj.css({
         //     'position': 'relative',
         //     'left': '-210px',

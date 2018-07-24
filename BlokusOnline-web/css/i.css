@@ -41,7 +41,7 @@ body {
     border: 1px solid black;
 }
 
-.chess-box-hide{
+.chess-box-hide {
     float: left;
     width: 40px;
     height: 40px;
@@ -110,6 +110,7 @@ input:checked + div {
     float: left;
     margin-bottom: 100px;
     display: none;
+    overflow: scroll;
 }
 
 .content-right-2 {
@@ -121,6 +122,7 @@ input:checked + div {
     float: left;
     margin-bottom: 100px;
     display: none;
+    overflow: scroll;
 }
 
 .content-right-3 {
@@ -132,6 +134,7 @@ input:checked + div {
     float: left;
     margin-bottom: 100px;
     display: none;
+    overflow: scroll;
 }
 
 .content-right-4 {
@@ -143,6 +146,7 @@ input:checked + div {
     float: left;
     margin-bottom: 100px;
     display: none;
+    overflow: scroll;
 }
 
 .content-left {
@@ -152,8 +156,7 @@ input:checked + div {
     background-color: white;
     margin-right: 25px;
     padding: 10px;
-    margin-top: 250px;
-
+    /*margin-top: 250px;*/
     float: left;
 
 }
@@ -165,24 +168,45 @@ input:checked + div {
     background-color: lightsteelblue;
     /*margin-left: 25px;*/
     margin: 10px auto;
+    /*overflow: hidden;*/
     /*-webkit-animation: spin 2s linear infinite;*/
     /*animation: spin 2s linear infinite;*/
 }
 
 .choose-chess-button-hide {
-    position: relative;
-    width: 210px;
-    height: 210px;
+    /*position: relative;*/
+    /*width: 210px;*/
+    /*height: 210px;*/
     /*border: 1px solid green;*/
-    background-color: transparent;
-    top: -0px;
-    left: -210px;
-    float: left
+
+    /*background-color: transparent;*/
+
+    /*top: -0px;*/
+    /*left: -210px;*/
+    /*float: left*/
 
     /*margin-left: 25px;*/
     /*margin: 10px auto;*/
     /*-webkit-animation: spin 2s linear infinite;*/
     /*animation: spin 2s linear infinite;*/
+}
+
+.choose-chess-button-relative {
+    position: relative;
+    width: 210px;
+    height: 210px;
+    background-color: transparent;
+    top: -0px;
+    /*margin-top: -212px;*/
+    /*background-color: chocolate;*/
+    left: -210px;
+    float: left
+}
+
+.chess-choose-box {
+    width: 210px;
+    height: 210px;
+    /*margin-top: -212px;*/
 }
 
 .choose-chess-button-hide0 {
