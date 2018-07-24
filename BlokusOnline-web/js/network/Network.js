@@ -46,30 +46,38 @@ MsgType.INIT_PLAYER_INFO_IN_GAME = 22;
 MsgType.LOGOUT = 23;
 
 
+MsgType.PING = 1000;
+
+
 function MessageBean(msgType, content) {
     this.msgType = msgType;
     this.content = content;
 }
 
+ping = function () {
+    window.webSocketClient.webSocket.send('{"msgType":1000,"content":""}')
+
+};
+
 function WebSocketClient(networkManager) {
     this.networkManager = networkManager;
-    this.ws = undefined;
+    this.webSocket = undefined;
 
     this.connect = function () {
-        if (ws != undefined) {
+        if (this.webSocket != undefined) {
             return;
         }
 
-        ws = new WebSocket("ws://localhost:19090/ws");
+        this.webSocket = new WebSocket("ws://localhost:19090/blokus");
 
-        ws.onopen = function () {
+        this.webSocket.onopen = function () {
             alert("连接成功");
             console.log('connected');
-            setInterval("ping()", 15000);
+            setInterval("ping()", 5000);
         };
 
 
-        ws.onmessage = function (evt) {
+        this.webSocket.onmessage = function (evt) {
             var received_msg = evt.data;
             // alert("数据已接收...");
             console.log("receive from server:" + received_msg);
@@ -78,23 +86,20 @@ function WebSocketClient(networkManager) {
 
         };
 
-        ws.onclose = function () {
+        this.webSocket.onclose = function () {
             // 关闭 websocket
             alert("连接已关闭...");
         };
 
+
+
     };
-
-
-    function ping() {
-        ws.send('{"msgType":"ping","content":""}')
-    }
 
 
 }
 
-function NetworkManager(gameUIController, blokusUIController) {
-    this.gameUIController = gameUIController;
+function NetworkManager(/*gameUIController,*/ blokusUIController) {
+    // this.gameUIController = gameUIController;
     this.blokusUIController = blokusUIController;
 
     this.handleMessage = function (messageBean) {
@@ -107,7 +112,6 @@ function NetworkManager(gameUIController, blokusUIController) {
 
 
     };
-
 
 
     this.chessDone = function (messageBean) {
