@@ -3,12 +3,14 @@
 
 <head>
 
-    <link rel="stylesheet" href="css/i.css">
+    <link rel="stylesheet" href="css/blokus.css">
+    <link rel="stylesheet" href="css/ui-page.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
 
 </head>
 
@@ -19,41 +21,50 @@
     <!--head-->
 </div>
 <div class="page-main">
-    <div class="content-main">
-        <div class="content-left">
-            <div class="time-box">
-                <div>时间</div>
+    <div class="blokus-panel">
+        <div class="content-main">
+            <div class="content-left">
+                <div class="time-box">
+                    <div>时间</div>
+                </div>
+                <button class="button-custom" onclick="rotation()">旋转</button>
+                <button class="button-custom" onclick="symmetry()">对称</button>
+                <button class="button-custom" onclick="lose()">认输</button>
             </div>
-            <button class="button-custom" onclick="rotation()">旋转</button>
-            <button class="button-custom" onclick="symmetry()">对称</button>
-            <button class="button-custom" onclick="lose()">认输</button>
-        </div>
 
-        <div class="chessboard"></div>
-        <input name="content-right-radio" id="content-right-radio-1" checked="checked" type="radio"
-               class="custom-hide"/>
-        <div class="content-right-1">
-        </div>
-        <input name="content-right-radio" id="content-right-radio-2" type="radio" class="custom-hide"/>
-        <div class="content-right-2">
-        </div>
-        <input name="content-right-radio" id="content-right-radio-3" type="radio" class="custom-hide"/>
-        <div class="content-right-3">
-        </div>
-        <input name="content-right-radio" id="content-right-radio-4" type="radio" class="custom-hide"/>
-        <div class="content-right-4">
-        </div>
+            <div class="chessboard"></div>
+            <input name="content-right-radio" id="content-right-radio-1" checked="checked" type="radio"
+                   class="custom-hide"/>
+            <div class="content-right-1">
+            </div>
+            <input name="content-right-radio" id="content-right-radio-2" type="radio" class="custom-hide"/>
+            <div class="content-right-2">
+            </div>
+            <input name="content-right-radio" id="content-right-radio-3" type="radio" class="custom-hide"/>
+            <div class="content-right-3">
+            </div>
+            <input name="content-right-radio" id="content-right-radio-4" type="radio" class="custom-hide"/>
+            <div class="content-right-4">
+            </div>
 
 
-        <!--<div class="content-left">-->
-        <!--<button class="button-custom" onclick="rotation()">旋转</button>-->
-        <!--<button class="button-custom">对称</button>-->
-        <!--</div>-->
+            <!--<div class="content-left">-->
+            <!--<button class="button-custom" onclick="rotation()">旋转</button>-->
+            <!--<button class="button-custom">对称</button>-->
+            <!--</div>-->
 
-        <!--<lable class="custom-hide" for="content-right-radio-1"></lable>-->
-        <!--<lable class="custom-hide" for="content-right-radio-2"></lable>-->
-        <!--<lable class="custom-hide" for="content-right-radio-3"></lable>-->
-        <!--<lable class="custom-hide" for="content-right-radio-4"></lable>-->
+            <!--<lable class="custom-hide" for="content-right-radio-1"></lable>-->
+            <!--<lable class="custom-hide" for="content-right-radio-2"></lable>-->
+            <!--<lable class="custom-hide" for="content-right-radio-3"></lable>-->
+            <!--<lable class="custom-hide" for="content-right-radio-4"></lable>-->
+        </div>
+    </div>
+    <div class="room-panel">
+        <div class="room-main">
+            <div class="room-left-content"></div>
+            <div class="room-right-content"></div>
+        </div>
+
     </div>
 </div>
 

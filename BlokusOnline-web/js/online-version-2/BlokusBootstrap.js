@@ -47,6 +47,6 @@ $(function () {
 
     webSocketClient = new WebSocketClient(networkManager);
 
-    webSocketClient.connect();
+    // webSocketClient.connect();
 
 });

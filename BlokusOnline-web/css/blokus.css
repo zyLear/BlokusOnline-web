@@ -12,6 +12,11 @@ body {
     width: 100%;
 }
 
+.blokus-panel {
+    width: 100%;
+    display: none;
+}
+
 .content-main {
     width: 1450px;
     height: 840px;

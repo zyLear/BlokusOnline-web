@@ -1,0 +1,33 @@
+.room-panel {
+    width: 100%;
+    min-height: 940px;
+    background-color: transparent;
+    border: 1px solid black;
+}
+
+.room-main {
+    width: 1200px;
+    min-height: 700px;
+    border: 1px solid black;
+    margin: 20px auto;
+    padding: 1%;
+
+}
+
+.room-left-content{
+    border: 1px solid black;
+    height: 200px;
+    float: left;
+    width: 30%;
+    /*margin: 5px;*/
+
+}
+.room-right-content{
+    /*margin: 5px;*/
+    border: 1px solid black;
+    height: 200px;
+    width: 67%;
+    margin-left: 2%;
+    float: left;
+
+}
