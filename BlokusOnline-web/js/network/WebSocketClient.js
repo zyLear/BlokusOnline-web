@@ -9,7 +9,7 @@ function connect() {
 
     wxId = document.getElementById('connectText').value
     // 打开一个 web socket
-    ws = new WebSocket("ws://172.22.13.74:19090/ws?token=" + wxId);
+    ws = new WebSocket("ws://localhost:19090/ws?token="); /*+ wxId*/
     // function connect() {
 
 
@@ -40,5 +40,5 @@ function connect() {
 
 
 function ping() {
-    ws.send('{"wxId":"' + wxId + '","msgType":"ping"}')
+    window.webSocketClient.ws.send('{"content":"","msgType":1000}')
 }
