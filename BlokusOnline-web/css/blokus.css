@@ -187,23 +187,6 @@ input:checked + div {
     /*animation: spin 2s linear infinite;*/
 }
 
-.choose-chess-button-hide {
-    /*position: relative;*/
-    /*width: 210px;*/
-    /*height: 210px;*/
-    /*border: 1px solid green;*/
-
-    /*background-color: transparent;*/
-
-    /*top: -0px;*/
-    /*left: -210px;*/
-    /*float: left*/
-
-    /*margin-left: 25px;*/
-    /*margin: 10px auto;*/
-    /*-webkit-animation: spin 2s linear infinite;*/
-    /*animation: spin 2s linear infinite;*/
-}
 
 .choose-chess-button-relative {
     position: relative;
@@ -232,9 +215,7 @@ input:checked + div {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin: 12px;
-    margin-right: 28px;
+    margin: 12px 28px;
     font-family: Verdana, Genva, Arial, sans-serif;
     font-size: 20px;
     font-style: inherit;
