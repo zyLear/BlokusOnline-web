@@ -3,12 +3,14 @@
 
 <head>
 
-    <link rel="stylesheet" href="css/i.css">
+    <link rel="stylesheet" href="css/blokus.css">
+    <link rel="stylesheet" href="css/ui-page.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
 
 </head>
 
@@ -19,51 +21,149 @@
     <!--head-->
 </div>
 <div class="page-main">
-    <div class="content-main">
-        <div class="content-left">
-            <div class="time-box">
-                <div>时间</div>
+    <div class="blokus-panel">
+        <div class="content-main">
+            <div class="content-left">
+                <div class="time-box">
+                    <div>时间</div>
+                </div>
+                <button class="button-custom" onclick="rotation()">旋转</button>
+                <button class="button-custom" onclick="symmetry()">对称</button>
+                <button class="button-custom" onclick="lose()">认输</button>
             </div>
-            <button class="button-custom" onclick="rotation()">旋转</button>
-            <button class="button-custom" onclick="symmetry()">对称</button>
-            <button class="button-custom" onclick="lose()">认输</button>
-        </div>
 
-        <div class="chessboard"></div>
-        <input name="content-right-radio" id="content-right-radio-1" checked="checked" type="radio"
-               class="custom-hide"/>
-        <div class="content-right-1">
-        </div>
-        <input name="content-right-radio" id="content-right-radio-2" type="radio" class="custom-hide"/>
-        <div class="content-right-2">
-        </div>
-        <input name="content-right-radio" id="content-right-radio-3" type="radio" class="custom-hide"/>
-        <div class="content-right-3">
-        </div>
-        <input name="content-right-radio" id="content-right-radio-4" type="radio" class="custom-hide"/>
-        <div class="content-right-4">
-        </div>
+            <div class="chessboard"></div>
+            <input name="content-right-radio" id="content-right-radio-1" checked="checked" type="radio"
+                   class="custom-hide"/>
+            <div class="content-right-1">
+            </div>
+            <input name="content-right-radio" id="content-right-radio-2" type="radio" class="custom-hide"/>
+            <div class="content-right-2">
+            </div>
+            <input name="content-right-radio" id="content-right-radio-3" type="radio" class="custom-hide"/>
+            <div class="content-right-3">
+            </div>
+            <input name="content-right-radio" id="content-right-radio-4" type="radio" class="custom-hide"/>
+            <div class="content-right-4">
+            </div>
 
 
-        <!--<div class="content-left">-->
-        <!--<button class="button-custom" onclick="rotation()">旋转</button>-->
-        <!--<button class="button-custom">对称</button>-->
-        <!--</div>-->
+            <!--<div class="content-left">-->
+            <!--<button class="button-custom" onclick="rotation()">旋转</button>-->
+            <!--<button class="button-custom">对称</button>-->
+            <!--</div>-->
 
-        <!--<lable class="custom-hide" for="content-right-radio-1"></lable>-->
-        <!--<lable class="custom-hide" for="content-right-radio-2"></lable>-->
-        <!--<lable class="custom-hide" for="content-right-radio-3"></lable>-->
-        <!--<lable class="custom-hide" for="content-right-radio-4"></lable>-->
+            <!--<lable class="custom-hide" for="content-right-radio-1"></lable>-->
+            <!--<lable class="custom-hide" for="content-right-radio-2"></lable>-->
+            <!--<lable class="custom-hide" for="content-right-radio-3"></lable>-->
+            <!--<lable class="custom-hide" for="content-right-radio-4"></lable>-->
+        </div>
     </div>
+    <div class="room-panel" style="display: none;">
+        <div class="room-main">
+            <div class="room-left-content">
+                <div class="block-top" style="display: none;">
+                    <div class="prompt-text">请选择颜色</div>
+                    <div class="color-button-box">
+                        <button class="color-button"></button>
+                        <button class="color-button"></button>
+                        <button class="color-button"></button>
+                        <button class="color-button"></button>
+                    </div>
+                </div>
+                <div class="block-bottom">
+                    <div>
+
+                        <div id="room-name">
+                            {{ message }}
+                        </div>
+                        <div>
+                            <!--<div id="room-list" v-for="todo in rooms">-->
+                            <!--{{ todo.name }}-->
+                            <!--</div>-->
+                        </div>
+
+                        <!--<button class="button-custom">-->
+                        <!--开始-->
+                        <!--</button>-->
+                        <!--<button class="button-custom">-->
+                        <!--返回-->
+                        <!--</button>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-right-content">
+                <div class="block-top">
+                    <table class="player-choose-info" style="display:none">
+                        <tr>
+                            <th>名字</th>
+                            <th>选择颜色</th>
+                            <th>准备状态</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="block-bottom"></div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="room-list-panel">
+        <div class="room-main">
+            <div class="room-left-content"></div>
+            <div class="room-right-content">
+                <div id="room-list">
+                    <div style="width: 100%" v-for="room in rooms" class="room-info-box">
+                        <span style="width: 30%">{{ room.roomName }}</span>
+                        <span style="width: 30%">{{ room.currentPlayers }}/{{room.maxPlayers}}</span>
+                        <span style="width: 30%">{{ room.roomStatus }}</span>
+                    </div>
+                    <!--<div class="room-info-box"></div>-->
+                    <!--<div class="room-info-box"></div>-->
+                    <!--<div class="room-info-box"></div>-->
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
 </div>
 
 
 <!--<script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>-->
 <script src="vendor/jquery190.min.js"></script>
+<script src="vendor/vue108.min.js"></script>
 <!--<script src="js/two.js"></script>-->
 <script src="js/online-version-2/BlokusCore.js"></script>
 <script src="js/online-version-2/BlokusController.js"></script>
 <script src="js/online-version-2/BlokusUIController.js"></script>
+<script src="js/online-version-2/GameUIController.js"></script>
 <script src="js/network/Network.js"></script>
 <script src="js/online-version-2/BlokusBootstrap.js"></script>
 

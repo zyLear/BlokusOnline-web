@@ -1,7 +1,6 @@
 var webSocketClient;
 var blokusUIController;
 var networkManager;
-var gameUIController;
 
 function rotation() {
     blokusUIController.rotation();
@@ -14,6 +13,7 @@ function symmetry() {
 function clickChooseChess(chessName) {
     blokusUIController.clickChooseChess(chessName);
 }
+
 
 
 function lose() {
@@ -34,7 +34,6 @@ function chessDown($this) {
 
 $(function () {
     blokusUIController = new BlokusUIController();
-    gameUIController = new GameUIController();
     $(document).mouseup(function (event) {
         blokusUIController.mouseUp(event.pageX, event.pageY);
 
@@ -44,11 +43,10 @@ $(function () {
         blokusUIController.moving(event.pageX, event.pageY);
     });
 
-    networkManager = new NetworkManager(gameUIController, blokusUIController);
+    networkManager = new NetworkManager(blokusUIController);
 
     webSocketClient = new WebSocketClient(networkManager);
 
     // webSocketClient.connect();
-
 
 });

@@ -92,14 +92,13 @@ function WebSocketClient(networkManager) {
         };
 
 
-
     };
 
 
 }
 
-function NetworkManager(/*gameUIController,*/ blokusUIController) {
-    // this.gameUIController = gameUIController;
+function NetworkManager(gameUIController, blokusUIController) {
+    this.gameUIController = gameUIController;
     this.blokusUIController = blokusUIController;
 
     this.handleMessage = function (messageBean) {
