@@ -90,10 +90,32 @@
 }
 
 .room-info-box {
+
     float: left;
     width: 48%;
-    height: 100px;
+    /*height: 100px;*/
     background-color: aliceblue;
     margin: 10px 1%;
     border-radius: 15px;
+
+}
+
+.room-info-box > div {
+    float: left;
+    vertical-align: middle;
+    /*height: 100%;*/
+    text-align: center;
+    font-size: 25px;
+    padding-top: 33px;
+    padding-bottom: 33px;
+}
+
+.input-text-custom{
+    height: 40px;
+    width: 50%;
+    border-radius: 10px;
+    border: transparent;
+    margin: 40px 25%;
+    text-align: center;
+    font-size: 30px;
 }
