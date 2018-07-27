@@ -131,13 +131,18 @@
     </div>
     <div class="room-list-panel">
         <div class="room-main">
-            <div class="room-left-content"></div>
+            <div class="room-left-content">
+
+                <input class="input-text-custom" id="create-room-name" />
+                <button id="sure-create-room" class="button-custom">创建房间</button>
+
+            </div>
             <div class="room-right-content">
                 <div id="room-list">
-                    <div style="width: 100%" v-for="room in rooms" class="room-info-box">
-                        <span style="width: 30%">{{ room.roomName }}</span>
-                        <span style="width: 30%">{{ room.currentPlayers }}/{{room.maxPlayers}}</span>
-                        <span style="width: 30%">{{ room.roomStatus }}</span>
+                    <div  v-for="room in rooms" class="room-info-box">
+                        <div style=" width: 50%;">{{ room.roomName }}</div>
+                        <div style=" width: 20%">{{ room.currentPlayers }}/{{room.maxPlayers}}</div>
+                        <div style=" width: 30%">{{ room.roomStatus }}</div>
                     </div>
                     <!--<div class="room-info-box"></div>-->
                     <!--<div class="room-info-box"></div>-->

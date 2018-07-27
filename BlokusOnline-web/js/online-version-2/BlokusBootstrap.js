@@ -20,6 +20,11 @@ function lose() {
     blokusUIController.lose(blokusUIController.blokusController.currentColor);
 }
 
+function sureCreateRoom() {
+
+    gameUIController.sureCreateRoom();
+}
+
 // function mouseUp(event) {
 //
 //

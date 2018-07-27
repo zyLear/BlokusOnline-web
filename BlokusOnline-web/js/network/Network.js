@@ -91,6 +91,11 @@ function WebSocketClient(networkManager) {
             alert("连接已关闭...");
         };
 
+        this.sendMessage=function (msg) {
+            this.webSocket.send(msg);
+
+        }
+
 
     };
 
