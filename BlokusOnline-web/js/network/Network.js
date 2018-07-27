@@ -45,6 +45,17 @@ MsgType.INIT_PLAYER_INFO_IN_GAME = 22;
 
 MsgType.LOGOUT = 23;
 
+MsgType.CREATE_ROOM_RESPONSE = 24;
+
+MsgType.LOGIN_RESPONSE = 25;
+
+MsgType.JOIN_ROOM_RESPONSE = 26;
+
+MsgType.LEAVE_ROOM_RESPONSE = 27;
+
+MsgType.REGISTER_RESPONSE = 28;
+
+
 
 MsgType.PING = 1000;
 
@@ -112,6 +123,12 @@ function NetworkManager(gameUIController, blokusUIController) {
             case MsgType.CHESS_DONE:
                 responses = this.chessDone(messageBean);
                 break;
+            case MsgType.ROOM_LIST:
+                this.updateRoomList(messageBean);
+                break;
+            case MsgType.UPDATE_ROOM_PLAYERS_INFO:
+                this.updateRoomPlayersInfo(messageBean);
+                break;
         }
 
 
@@ -120,7 +137,17 @@ function NetworkManager(gameUIController, blokusUIController) {
 
     this.chessDone = function (messageBean) {
         var object = JSON.parse(messageBean.content);
-        blokusUIController.chessDone(object.x, object.y, object.model, object.chessName);
+        this.blokusUIController.chessDone(object.x, object.y, object.model, object.chessName);
+    };
+
+    this.updateRoomList = function (messageBean) {
+        var obj = JSON.parse(messageBean.content);
+        this.gameUIController.updateRoomList(obj);
+    };
+
+    this.updateRoomPlayersInfo = function (messageBean) {
+        var obj = JSON.parse(messageBean.content);
+        this.gameUIController.updateRoomPlayersInfo(obj);
     };
 
 
