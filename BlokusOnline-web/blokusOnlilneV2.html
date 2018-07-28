@@ -20,8 +20,8 @@
     <h1>blokus</h1>
     <!--head-->
 </div>
-<div class="page-main">
-    <div class="blokus-panel">
+<div id="page-main" class="page-main">
+    <div v-show="show==1" class="blokus-panel">
         <div class="content-main">
             <div class="content-left">
                 <div class="time-box">
@@ -59,10 +59,11 @@
             <!--<lable class="custom-hide" for="content-right-radio-4"></lable>-->
         </div>
     </div>
-    <div class="room-panel" style="display: none;">
+
+    <div v-show="show==2" class="room-panel">
         <div class="room-main">
             <div class="room-left-content">
-                <div class="block-top" style="display: none;">
+                <div class="block-top" ><!--style="display: none;"-->
                     <div class="prompt-text">请选择颜色</div>
                     <div class="color-button-box">
                         <button class="color-button"></button>
@@ -95,53 +96,57 @@
 
             <div class="room-right-content">
                 <div class="block-top">
-                    <table class="player-choose-info" style="display:none">
+                    <table id="roomPlayersInfo" class="player-choose-info">
                         <tr>
                             <th>名字</th>
                             <th>选择颜色</th>
                             <th>准备状态</th>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        <tr v-for="item in items">
+
+                            <td>{{ item.account }}</td>
+                            <td>{{ item.color }}</td>
+                            <td>{{ item.isReady }}</td>
+
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        <!--<tr>-->
+                        <!--<td></td>-->
+                        <!--<td></td>-->
+                        <!--<td></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                        <!--<td></td>-->
+                        <!--<td></td>-->
+                        <!--<td></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                        <!--<td></td>-->
+                        <!--<td></td>-->
+                        <!--<td></td>-->
+                        <!--</tr>-->
                     </table>
                 </div>
                 <div class="block-bottom"></div>
             </div>
         </div>
 
-
     </div>
-    <div class="room-list-panel">
+
+    <div v-show="show==3" class="room-list-panel" style="display: none">
         <div class="room-main">
             <div class="room-left-content">
-
-                <input class="input-text-custom" id="create-room-name" />
-                <button id="sure-create-room" class="button-custom">创建房间</button>
+                <div style="display: none;">
+                    <input class="input-text-custom" id="create-room-name"/>
+                    <button id="sure-create-room" class="button-custom">创建房间</button>
+                </div>
+                <button onclick="sureCreateRoom()">xx</button>
 
             </div>
             <div class="room-right-content">
                 <div id="room-list">
-                    <div  v-for="room in rooms" class="room-info-box">
+                    <div v-for="room in rooms" class="room-info-box">
                         <div style=" width: 50%;">{{ room.roomName }}</div>
-                        <div style=" width: 20%">{{ room.currentPlayers }}/{{room.maxPlayers}}</div>
+                        <div style=" width: 20%">{{ room.currentPlayerCount }}/{{room.maxPlayerCount}}</div>
                         <div style=" width: 30%">{{ room.roomStatus }}</div>
                     </div>
                     <!--<div class="room-info-box"></div>-->

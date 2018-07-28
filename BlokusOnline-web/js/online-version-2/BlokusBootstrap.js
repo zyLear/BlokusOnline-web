@@ -38,18 +38,18 @@ function chessDown($this) {
 
 
 $(function () {
-    blokusUIController = new BlokusUIController();
+    // blokusUIController = new BlokusUIController();
     gameUIController = new GameUIController();
     $(document).mouseup(function (event) {
-        blokusUIController.mouseUp(event.pageX, event.pageY);
+        // blokusUIController.mouseUp(event.pageX, event.pageY);
 
     });
 
     $(document).mousemove(function (event) {
-        blokusUIController.moving(event.pageX, event.pageY);
+        // blokusUIController.moving(event.pageX, event.pageY);
     });
 
-    networkManager = new NetworkManager(gameUIController, blokusUIController);
+    networkManager = new NetworkManager(gameUIController, null);
 
     webSocketClient = new WebSocketClient(networkManager);
 

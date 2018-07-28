@@ -3,7 +3,7 @@ function BlokusControllerJudgeResult(blokusJudgeResult, chess) {
     this.chess = chess;
 }
 
-function BlokusController(chessMap) {
+function BlokusController(chessMap, color) {
 
 
     this.init = function () {
@@ -25,7 +25,7 @@ function BlokusController(chessMap) {
 
     this.loseColor = [0, 0, 0, 0, 0];  //记录已经输了的颜色
     this.currentColor = blue;    //当前下棋子的颜色
-    this.myColor = 0;  //玩家的颜色
+    this.myColor = color;  //玩家的颜色
     this.loseCount = 0;  //已经输的玩家的个数
 
 

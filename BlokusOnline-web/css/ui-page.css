@@ -79,8 +79,14 @@
 
 .player-choose-info td, .player-choose-info th {
     border: 1px solid black;
-    height: 40px;
+    /*height: 20px;*/
+    text-align: center;
+    /*padding-top: 5px;*/
 }
+
+/*.player-choose-info td {*/
+ /**/
+/*}*/
 
 .room-list-panel {
     width: 100%;
@@ -110,7 +116,7 @@
     padding-bottom: 33px;
 }
 
-.input-text-custom{
+.input-text-custom {
     height: 40px;
     width: 50%;
     border-radius: 10px;
