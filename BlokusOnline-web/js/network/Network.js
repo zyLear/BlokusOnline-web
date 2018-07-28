@@ -56,8 +56,7 @@ MsgType.LEAVE_ROOM_RESPONSE = 27;
 MsgType.REGISTER_RESPONSE = 28;
 
 
-
-MsgType.PING = 1000;
+MsgType.PING = 10000;
 
 
 function MessageBean(msgType, content) {
@@ -65,13 +64,18 @@ function MessageBean(msgType, content) {
     this.content = content;
 }
 
+
+// var pingMsg = {
+//     msgType: MsgType.PING,
+//     connect: ''
+// };
 ping = function () {
-    window.webSocketClient.webSocket.send('{"msgType":1000,"content":""}')
+    window.webSocketClient.webSocket.send('{"msgType":16,"content":""}')
 
 };
 
-function WebSocketClient(networkManager) {
-    this.networkManager = networkManager;
+function WebSocketClient() {
+    // this.networkManager = networkManager;
     this.webSocket = undefined;
 
     this.connect = function () {
@@ -82,8 +86,9 @@ function WebSocketClient(networkManager) {
         this.webSocket = new WebSocket("ws://localhost:19090/blokus");
 
         this.webSocket.onopen = function () {
-            alert("连接成功");
+            //  alert("连接成功");
             console.log('connected');
+            gameUIController.tabController.show = 4;
             setInterval("ping()", 5000);
         };
 
@@ -92,8 +97,8 @@ function WebSocketClient(networkManager) {
             var received_msg = evt.data;
             // alert("数据已接收...");
             console.log("receive from server:" + received_msg);
-
-            this.networkManager.handleMessage(1);
+            var obj = JSON.parse(received_msg);
+            window.networkManager.handleMessage(obj);
 
         };
 
@@ -102,8 +107,8 @@ function WebSocketClient(networkManager) {
             alert("连接已关闭...");
         };
 
-        this.sendMessage=function (msg) {
-            this.webSocket.send(msg);
+        this.sendMessage = function (msg) {
+            this.webSocket.send(JSON.stringify(msg));
 
         }
 
@@ -120,6 +125,15 @@ function NetworkManager(gameUIController, blokusUIController) {
     this.handleMessage = function (messageBean) {
         var responses;
         switch (messageBean.msgType) {
+            case MsgType.LOGIN_RESPONSE:
+                this.loginResponse(messageBean);
+                break;
+            case MsgType.CREATE_ROOM_RESPONSE:
+                this.roomResponse(messageBean);
+                break;
+            case MsgType.JOIN_ROOM_RESPONSE:
+                this.roomResponse(messageBean);
+                break;
             case MsgType.CHESS_DONE:
                 responses = this.chessDone(messageBean);
                 break;
@@ -129,9 +143,33 @@ function NetworkManager(gameUIController, blokusUIController) {
             case MsgType.UPDATE_ROOM_PLAYERS_INFO:
                 this.updateRoomPlayersInfo(messageBean);
                 break;
+            case MsgType.START_BLOKUS:
+                this.startBlokus(messageBean);
+                break;
+            case MsgType.LOSE:
+                this.lose(messageBean);
+                break;
         }
 
 
+    };
+
+    this.loginResponse = function (messageBean) {
+        var object = JSON.parse(messageBean.content);
+        if (object.errorCode == 0) {
+            gameUIController.tabController.show = 3;
+        } else {
+            alert('login fail');
+        }
+    };
+
+    this.roomResponse = function (messageBean) {
+        var object = JSON.parse(messageBean.content);
+        if (object.errorCode == 0) {
+            gameUIController.tabController.show = 2;
+        } else {
+            alert('create room fail');
+        }
     };
 
 
@@ -142,13 +180,34 @@ function NetworkManager(gameUIController, blokusUIController) {
 
     this.updateRoomList = function (messageBean) {
         var obj = JSON.parse(messageBean.content);
-        this.gameUIController.updateRoomList(obj);
+        this.gameUIController.updateRoomList(obj.roomItems);
     };
 
     this.updateRoomPlayersInfo = function (messageBean) {
         var obj = JSON.parse(messageBean.content);
-        this.gameUIController.updateRoomPlayersInfo(obj);
+        this.gameUIController.updateRoomPlayersInfo(obj.playerInfoMsgList);
     };
+
+    this.startBlokus = function (messageBean) {
+        var obj = JSON.parse(messageBean.content);
+        var color = obj.color;
+        var gameType = obj.gameType;
+        if (gameType == 1) {
+            MAX_PLAYERS_COUNT = 4;
+            MAX_ROW_AND_COLUMN = 20;
+        } else {
+            MAX_PLAYERS_COUNT = 2;
+            MAX_ROW_AND_COLUMN = 14;
+        }
+        this.blokusUIController.start(color);
+        gameUIController.tabController.show = 1;
+    };
+
+    this.lose=function(messageBean){
+        var obj = JSON.parse(messageBean.content);
+        var color = obj.color;
+        this.blokusUIController.lose(color);
+    }
 
 
 }

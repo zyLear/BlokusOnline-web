@@ -14,7 +14,6 @@ body {
 
 .blokus-panel {
     width: 100%;
-    display: none;
 }
 
 .content-main {
@@ -221,6 +220,7 @@ input:checked + div {
     font-style: inherit;
     /*font-weight:bold;*/
     font-weight: bold;
+    cursor: pointer;
 
 }
 

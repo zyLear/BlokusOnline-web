@@ -57,6 +57,9 @@ function BlokusUIController() {
 
     this.initChooseChessByColor = function (chessMap, color) {
 
+        var contentRight = $('.content-right-' + color);
+        contentRight.html('');
+
         var model1 = new Array(5);
         model1[0] = [0, 0, 0, 0, 0];
         model1[1] = [0, 0, 0, 0, 0];
@@ -106,8 +109,11 @@ function BlokusUIController() {
 
     this.initChessBoard = function () {
         var chessboard = $('.chessboard');
-        for (var i = 0; i < 20; i++) {
-            for (var j = 0; j < 20; j++) {
+        chessboard.css('width', MAX_ROW_AND_COLUMN * 42);
+        chessboard.css('height', MAX_ROW_AND_COLUMN * 42);
+        chessboard.html('');
+        for (var i = 0; i < MAX_ROW_AND_COLUMN; i++) {
+            for (var j = 0; j < MAX_ROW_AND_COLUMN; j++) {
                 var chess = $('<div class="chess-box-game" "></div>');
                 //onclick="chessDown(this)
                 var id = j + 'x' + i;
@@ -118,14 +124,29 @@ function BlokusUIController() {
 
     };
 
-    this.start = function () {
+    this.start = function (color) {
+
+        $(document).mouseup(function (event) {
+            blokusUIController.mouseUp(event.pageX, event.pageY);
+
+        });
+
+        $(document).mousemove(function (event) {
+            blokusUIController.moving(event.pageX, event.pageY);
+        });
+
+        if (this.deadlineController != null) {
+            clearInterval(this.deadlineController);
+        }
+        this.deadlineController = this.formDeadlineController();
         var map = new Map();
         this.initChessBoard();
         this.initChooseChessByColor(map, blue);
         this.initChooseChessByColor(map, green);
         this.initChooseChessByColor(map, red);
         this.initChooseChessByColor(map, yellow);
-        this.blokusController = new BlokusController(map);
+        this.showChoosePanel(color);
+        this.blokusController = new BlokusController(map, color);
     };
 
     this.frameUpdate = function () {
@@ -155,8 +176,8 @@ function BlokusUIController() {
     this.deadline = this.defaulDeadline;
     this.currentChessName = '';
     this.blokusController = null;
-    this.deadlineController = this.formDeadlineController();
-    this.start();
+    this.deadlineController = null;
+    // this.start();
 
     this.isMove = false;
     this.abs_x;
@@ -245,6 +266,9 @@ function BlokusUIController() {
             var y = blokusJudgeResult.y;
             var model = blokusJudgeResult.model;
 
+
+            var msg = formChessDoneMsg(x, y, chess.model, chess.name);
+            webSocketClient.sendMessage(msg);
             this.chessDone(x, y, chess.model, chess.name);
         }
     };
@@ -259,7 +283,7 @@ function BlokusUIController() {
         this.deadline = this.defaulDeadline;
         this.formChessAfterDown(x, y, model, currentChess.color);
         this.blokusController.chessDone(x, y, model, currentChess.color);
-        this.showChoosePanel(this.blokusController.currentColor);
+        // this.showChoosePanel(this.blokusController.currentColor);
         $('#chooseButton' + currentChess.name).addClass('custom-hide');
 
     };
@@ -288,9 +312,14 @@ function BlokusUIController() {
         }
     };
 
+    this.giveUp = function () {
+        var msg = formGiveUpMsg(this.blokusController.myColor);
+        webSocketClient.sendMessage(msg);
+    };
+
     this.lose = function (color) {
         var nextColor = this.blokusController.lose(color);
-        this.showChoosePanel(nextColor);
+        // this.showChoosePanel(nextColor);
         this.deadline = this.defaulDeadline;
     };
 

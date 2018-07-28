@@ -17,12 +17,24 @@ function clickChooseChess(chessName) {
 
 
 function lose() {
-    blokusUIController.lose(blokusUIController.blokusController.currentColor);
+    blokusUIController.giveUp();
 }
 
 function sureCreateRoom() {
 
     gameUIController.sureCreateRoom();
+}
+
+function sureLogin() {
+    gameUIController.sureLogin();
+}
+
+function chooseColor(color) {
+    gameUIController.chooseColor(color);
+}
+
+function ready() {
+    gameUIController.ready();
 }
 
 // function mouseUp(event) {
@@ -38,22 +50,15 @@ function chessDown($this) {
 
 
 $(function () {
-    // blokusUIController = new BlokusUIController();
+    blokusUIController = new BlokusUIController();
     gameUIController = new GameUIController();
-    $(document).mouseup(function (event) {
-        // blokusUIController.mouseUp(event.pageX, event.pageY);
 
-    });
 
-    $(document).mousemove(function (event) {
-        // blokusUIController.moving(event.pageX, event.pageY);
-    });
+    networkManager = new NetworkManager(gameUIController, blokusUIController);
 
-    networkManager = new NetworkManager(gameUIController, null);
+    webSocketClient = new WebSocketClient();
 
-    webSocketClient = new WebSocketClient(networkManager);
-
-    // webSocketClient.connect();
+    webSocketClient.connect();
 
 
 });

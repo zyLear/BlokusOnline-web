@@ -1,20 +1,22 @@
 function GameUIController() {
 
+    this.sureLogin = function () {
+        var account = $('#account').val();
+        var password = $('#password').val();
+        var msg = formLoginMsg(account, password);
+        window.webSocketClient.sendMessage(msg);
+    };
 
     this.sureCreateRoom = function () {
-        // var roomName = $('#create-room-name').val();
-        //
-        // var obj = new Object();
-        // obj.msgType = MsgType.CREATE_ROOM;
-        // var msg = new Object();
-        // msg.roomName = roomName;
-        // msg.gameType = 1;
-        // obj.content = JSON.stringify(msg);
-        // window.webSocketClient.sendMessage(obj);
+        // alert('df');
+        var roomName = $('#create-room-name').val();
 
-        // console.log('sss');
+        var msg = formCreateRoomMsg(roomName);
 
-        this.updateRoomList([]);
+
+        window.webSocketClient.sendMessage(msg);
+
+        // this.updateRoomList([]);
         // this.tabController.show = 2
     };
 
@@ -26,89 +28,47 @@ function GameUIController() {
         }
     });
 
-    // this.tabController = new Vue({
-    //     el: '#page-main',
-    //     data: {
-    //         show: 3
-    //     }
-    // });
-
-    this.roomPlayersInfo = new Vue({
-        el: '#roomPlayersInfo',
+    this.tabController = new Vue({
+        el: 'body',
         data: {
-            items: [
-                {
-                    account: "1",
-                    color: "sdf",
-                    isReady: "23"
-                }, {
-                    account: "2",
-                    color: "rtr",
-                    isReady: "2r3"
-                }, {
-                    account: "2",
-                    color: "rtr",
-                    isReady: "2r3"
-                }, {
-                    account: "2",
-                    color: "rtr",
-                    isReady: "2r3"
-                }
-            ]
+            show: 4,
+            roomList: {
+                rooms: []
+            },
+            roomPlayersInfo: {
+                items: []
+            }
+        },
+        methods:{
+            joinRoom:function (roomName) {
+                var msg = formJoinRoomMsg(roomName);
+                window.webSocketClient.sendMessage(msg);
+            }
         }
+
+
+
     });
 
 
-    this.roomList = new Vue({
-        el: '#room-list',
-        data: {
-            rooms: [
-                {
-                    roomName: 'aanna',
-                    maxPlayerCount: 2,
-                    roomStatus: 'kai',
-                    currentPlayerCount: 1
-                }, {
-                    roomName: 'aanna',
-                    maxPlayerCount: 4,
-                    roomStatus: 'kai',
-                    currentPlayerCount: 3
-                }, {
-                    roomName: 'aanna',
-                    maxPlayerCount: 4,
-                    roomStatus: 'kai',
-                    currentPlayerCount: 3
-                }
-            ]
-        }
-    });
 
     this.updateRoomList = function (obj) {
 
-        var aa = [
-            {
-                roomName: '232',
-                maxPlayerCount: 2,
-                roomStatus: 'kai',
-                currentPlayerCount: 1
-            }, {
-                roomName: '32',
-                maxPlayerCount: 4,
-                roomStatus: 'kai',
-                currentPlayerCount: 3
-            }, {
-                roomName: '123444',
-                maxPlayerCount: 4,
-                roomStatus: 'kai',
-                currentPlayerCount: 3
-            }
-        ];
-        // var obj = JSON.parse(content);
-        this.roomList.rooms = obj;
+        this.tabController.roomList.rooms = obj;
     };
 
     this.updateRoomPlayersInfo = function (obj) {
-        this.roomPlayersInfo.items = obj;
+        this.tabController.roomPlayersInfo.items = obj;
+    };
+
+    this.chooseColor = function (color){
+        var msg = formChooseColorMsg(color);
+        window.webSocketClient.sendMessage(msg);
+    };
+
+    this.ready = function (){
+        var msg = formReadyMsg();
+        window.webSocketClient.sendMessage(msg);
     };
 
 
