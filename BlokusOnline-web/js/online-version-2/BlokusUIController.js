@@ -128,7 +128,6 @@ function BlokusUIController() {
 
         $(document).mouseup(function (event) {
             blokusUIController.mouseUp(event.pageX, event.pageY);
-
         });
 
         $(document).mousemove(function (event) {
@@ -147,6 +146,20 @@ function BlokusUIController() {
         this.initChooseChessByColor(map, yellow);
         this.showChoosePanel(color);
         this.blokusController = new BlokusController(map, color);
+    };
+
+    this.end = function () {
+        $(document).mouseup(function () {
+            // blokusUIController.mouseUp(event.pageX, event.pageY);
+        });
+
+        $(document).mousemove(function () {
+            // blokusUIController.moving(event.pageX, event.pageY);
+        });
+
+        if (this.deadlineController != null) {
+            clearInterval(this.deadlineController);
+        }
     };
 
     this.frameUpdate = function () {

@@ -15,10 +15,10 @@ function clickChooseChess(chessName) {
     blokusUIController.clickChooseChess(chessName);
 }
 
-
-function lose() {
-    blokusUIController.giveUp();
-}
+//
+// function lose() {
+//     blokusUIController.giveUp();
+// }
 
 function sureCreateRoom() {
 

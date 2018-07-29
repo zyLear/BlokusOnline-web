@@ -8,12 +8,12 @@ function formLoginMsg(account, password) {
     return msg;
 }
 
-function formCreateRoomMsg(roomName) {
+function formCreateRoomMsg(roomName, gameType) {
     var msg = new Object();
     msg.msgType = MsgType.CREATE_ROOM;
     var obj = new Object();
     obj.roomName = roomName;
-    obj.gameType = 2;
+    obj.gameType = gameType;
     msg.content = JSON.stringify(obj);
     return msg;
 }
@@ -60,5 +60,17 @@ function formGiveUpMsg(color) {
     var obj = new Object();
     obj.color = color;
     msg.content = JSON.stringify(obj);
+    return msg;
+}
+
+function formLeaveRoomMsg() {
+    var msg = new Object();
+    msg.msgType = MsgType.LEAVE_ROOM;
+    return msg;
+}
+
+function formLogoutMsg() {
+    var msg = new Object();
+    msg.msgType = MsgType.LOGOUT;
     return msg;
 }

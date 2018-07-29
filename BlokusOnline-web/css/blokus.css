@@ -22,6 +22,10 @@ body {
     margin: 0 auto;
 }
 
+.content-main-two {
+    width: 1160px;
+}
+
 .chessboard {
     width: 840px;
     height: 840px;
@@ -163,8 +167,8 @@ input:checked + div {
 }
 
 .content-left {
-    width: 150px;
-    /*height: 640px;*/
+    width: 247px;
+    height: 840px;
     border: 1px solid green;
     background-color: white;
     margin-right: 25px;
@@ -185,7 +189,6 @@ input:checked + div {
     /*-webkit-animation: spin 2s linear infinite;*/
     /*animation: spin 2s linear infinite;*/
 }
-
 
 .choose-chess-button-relative {
     position: relative;

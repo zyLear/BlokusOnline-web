@@ -70,7 +70,7 @@ function MessageBean(msgType, content) {
 //     connect: ''
 // };
 ping = function () {
-    window.webSocketClient.webSocket.send('{"msgType":16,"content":""}')
+    window.webSocketClient.webSocket.send('{"msgType":10000,"content":""}')
 
 };
 
@@ -88,7 +88,7 @@ function WebSocketClient() {
         this.webSocket.onopen = function () {
             //  alert("连接成功");
             console.log('connected');
-            gameUIController.tabController.show = 4;
+            // gameUIController.tabController.show = 4;
             setInterval("ping()", 5000);
         };
 
@@ -146,8 +146,11 @@ function NetworkManager(gameUIController, blokusUIController) {
             case MsgType.START_BLOKUS:
                 this.startBlokus(messageBean);
                 break;
-            case MsgType.LOSE:
-                this.lose(messageBean);
+            case MsgType.GIVE_UP:
+                this.giveUp(messageBean);
+                break;
+            case MsgType.LEAVE_ROOM_RESPONSE:
+                this.leaveRoomResponse(messageBean);
                 break;
         }
 
@@ -158,6 +161,7 @@ function NetworkManager(gameUIController, blokusUIController) {
         var object = JSON.parse(messageBean.content);
         if (object.errorCode == 0) {
             gameUIController.tabController.show = 3;
+            window.webSocketClient.webSocket.send('{"msgType":16,"content":""}')
         } else {
             alert('login fail');
         }
@@ -166,7 +170,8 @@ function NetworkManager(gameUIController, blokusUIController) {
     this.roomResponse = function (messageBean) {
         var object = JSON.parse(messageBean.content);
         if (object.errorCode == 0) {
-            gameUIController.tabController.show = 2;
+            this.gameUIController.tabController.roomPlayersInfo.roomName = object.roomName;
+            this.gameUIController.tabController.show = 2;
         } else {
             alert('create room fail');
         }
@@ -195,18 +200,24 @@ function NetworkManager(gameUIController, blokusUIController) {
         if (gameType == 1) {
             MAX_PLAYERS_COUNT = 4;
             MAX_ROW_AND_COLUMN = 20;
+            this.gameUIController.tabController.blokusPanel.twoPeople = false;
         } else {
+            this.gameUIController.tabController.blokusPanel.twoPeople = true;
             MAX_PLAYERS_COUNT = 2;
             MAX_ROW_AND_COLUMN = 14;
         }
         this.blokusUIController.start(color);
-        gameUIController.tabController.show = 1;
+        this.gameUIController.tabController.show = 1;
     };
 
-    this.lose=function(messageBean){
+    this.giveUp = function (messageBean) {
         var obj = JSON.parse(messageBean.content);
         var color = obj.color;
         this.blokusUIController.lose(color);
+    };
+
+    this.leaveRoomResponse = function (messageBean) {
+        this.gameUIController.tabController.show = 3;
     }
 
 
