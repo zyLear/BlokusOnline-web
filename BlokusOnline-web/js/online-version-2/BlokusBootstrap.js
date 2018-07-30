@@ -54,6 +54,10 @@ $(function () {
     gameUIController = new GameUIController();
 
 
+    $(document).click(function () {
+        gameUIController.tabController.promptPanel.showPrompt = false;
+    });
+
     networkManager = new NetworkManager(gameUIController, blokusUIController);
 
     webSocketClient = new WebSocketClient();

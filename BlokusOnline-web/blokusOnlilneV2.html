@@ -12,7 +12,6 @@
     <title>Document</title>
 
 
-
 </head>
 
 <body>
@@ -22,7 +21,7 @@
     <!--head-->
 </div>
 <div id="page-main" class="page-main">
-    <div v-show="show===1" class="blokus-panel" >
+    <div v-show="show===1" class="blokus-panel">
         <div v-bind:class="{'content-main-two':blokusPanel.twoPeople}" class="content-main">
             <div class="content-left">
                 <div class="time-box">
@@ -62,26 +61,26 @@
         </div>
     </div>
 
-    <div v-show="show===2" class="room-panel" >
+    <div v-show="show===2" class="room-panel">
         <div class="room-main">
             <div class="room-left-content">
                 <div class="block-top"><!--style="display: none;"-->
                     <div class="prompt-text">请选择颜色</div>
                     <div class="color-button-box">
-                        <button class="color-button-green"  onclick="chooseColor(2)"></button>
-                        <button class="color-button-blue"  onclick="chooseColor(1)"></button>
-                        <button class="color-button-red" disabled onclick="chooseColor(3)"></button>
-                        <button class="color-button-yellow" disabled onclick="chooseColor(4)"></button>
+                        <button class="color-button-green" onclick="chooseColor(2)"></button>
+                        <button class="color-button-blue" onclick="chooseColor(1)"></button>
+                        <button class="color-button-red" onclick="chooseColor(3)"></button>
+                        <button class="color-button-yellow" onclick="chooseColor(4)"></button>
                     </div>
                 </div>
                 <div class="block-bottom">
                     <div class="padding-c">
 
                         <button class="menu-button-custom" onclick="ready()">
-                        开始
+                            开始
                         </button>
                         <button class="menu-button-custom" @click="backToRoomListPanel()">
-                        返回
+                            返回
                         </button>
                     </div>
                 </div>
@@ -113,14 +112,18 @@
 
     </div>
 
-    <div v-show="show===3" class="room-list-panel" >
+    <div v-show="show===3" class="room-list-panel">
         <div class="room-main">
             <div class="room-left-content">
                 <div class="padding-c">
                     <input placeholder="输入房间名字" class="input-text-custom" id="create-room-name"/>
 
-                    <div  class="game-type" v-bind:class="{'game-type-choose':roomList.twoPeople}" @click="chooseTwo(true)">双人</div>
-                    <div  class="game-type" v-bind:class="{'game-type-choose':!roomList.twoPeople}"  @click="chooseTwo(false)">四人</div>
+                    <div class="game-type" v-bind:class="{'game-type-choose':roomList.twoPeople}"
+                         @click="chooseTwo(true)">双人
+                    </div>
+                    <div class="game-type" v-bind:class="{'game-type-choose':!roomList.twoPeople}"
+                         @click="chooseTwo(false)">四人
+                    </div>
 
                     <button onclick="sureCreateRoom()" class="menu-button-custom">创建房间</button>
                     <button class="menu-button-custom" @click="logout()">退出登录</button><!--onclick="sureCreateRoom()"-->
@@ -148,7 +151,7 @@
         </div>
     </div>
 
-    <div v-show="show===4" class="login-panel" >
+    <div v-show="show===4" class="login-panel">
         <div class="room-main">
 
             <div class="login-main">
@@ -158,6 +161,12 @@
                 <div class="login-button" onclick="sureLogin()">登录</div>
             </div>
 
+        </div>
+    </div>
+
+    <div class="prompt-panel" v-bind:class="{'custom-hide':!promptPanel.showPrompt}">
+        <div class="prompt-div">
+            <div class="prompt-text-div"> {{promptPanel.promptMsg}}</div>
         </div>
     </div>
 
