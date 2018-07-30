@@ -45,7 +45,7 @@ $(function () {
 
     networkManager = new NetworkManager(blokusUIController);
 
-    webSocketClient = new WebSocketClient(networkManager);
+    webSocketClient = new WebSocketClient();
 
     // webSocketClient.connect();
 

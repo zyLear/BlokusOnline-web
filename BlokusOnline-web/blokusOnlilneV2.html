@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -12,6 +12,7 @@
     <title>Document</title>
 
 
+
 </head>
 
 <body>
@@ -21,15 +22,16 @@
     <!--head-->
 </div>
 <div id="page-main" class="page-main">
-    <div v-show="show==1" class="blokus-panel">
-        <div class="content-main">
+    <div v-show="show===1" class="blokus-panel" >
+        <div v-bind:class="{'content-main-two':blokusPanel.twoPeople}" class="content-main">
             <div class="content-left">
                 <div class="time-box">
                     <div>时间</div>
                 </div>
                 <button class="button-custom" onclick="rotation()">旋转</button>
                 <button class="button-custom" onclick="symmetry()">对称</button>
-                <button class="button-custom" onclick="lose()">认输</button>
+                <button class="button-custom" @click="giveUp()">认输</button>
+                <button class="button-custom" @click="backToRoomPanel()">返回</button>
             </div>
 
             <div class="chessboard"></div>
@@ -60,36 +62,27 @@
         </div>
     </div>
 
-    <div v-show="show==2" class="room-panel">
+    <div v-show="show===2" class="room-panel" >
         <div class="room-main">
             <div class="room-left-content">
-                <div class="block-top" ><!--style="display: none;"-->
+                <div class="block-top"><!--style="display: none;"-->
                     <div class="prompt-text">请选择颜色</div>
                     <div class="color-button-box">
-                        <button class="color-button"></button>
-                        <button class="color-button"></button>
-                        <button class="color-button"></button>
-                        <button class="color-button"></button>
+                        <button class="color-button-green"  onclick="chooseColor(2)"></button>
+                        <button class="color-button-blue"  onclick="chooseColor(1)"></button>
+                        <button class="color-button-red" disabled onclick="chooseColor(3)"></button>
+                        <button class="color-button-yellow" disabled onclick="chooseColor(4)"></button>
                     </div>
                 </div>
                 <div class="block-bottom">
-                    <div>
+                    <div class="padding-c">
 
-                        <div id="room-name">
-                            {{ message }}
-                        </div>
-                        <div>
-                            <!--<div id="room-list" v-for="todo in rooms">-->
-                            <!--{{ todo.name }}-->
-                            <!--</div>-->
-                        </div>
-
-                        <!--<button class="button-custom">-->
-                        <!--开始-->
-                        <!--</button>-->
-                        <!--<button class="button-custom">-->
-                        <!--返回-->
-                        <!--</button>-->
+                        <button class="menu-button-custom" onclick="ready()">
+                        开始
+                        </button>
+                        <button class="menu-button-custom" @click="backToRoomListPanel()">
+                        返回
+                        </button>
                     </div>
                 </div>
             </div>
@@ -98,32 +91,20 @@
                 <div class="block-top">
                     <table id="roomPlayersInfo" class="player-choose-info">
                         <tr>
+                            <th colspan="3">{{roomPlayersInfo.roomName}}</th>
+                        </tr>
+                        <tr>
                             <th>名字</th>
                             <th>选择颜色</th>
                             <th>准备状态</th>
                         </tr>
-                        <tr v-for="item in items">
+                        <tr v-for="item in roomPlayersInfo.items">
 
                             <td>{{ item.account }}</td>
                             <td>{{ item.color }}</td>
                             <td>{{ item.isReady }}</td>
 
                         </tr>
-                        <!--<tr>-->
-                        <!--<td></td>-->
-                        <!--<td></td>-->
-                        <!--<td></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                        <!--<td></td>-->
-                        <!--<td></td>-->
-                        <!--<td></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                        <!--<td></td>-->
-                        <!--<td></td>-->
-                        <!--<td></td>-->
-                        <!--</tr>-->
                     </table>
                 </div>
                 <div class="block-bottom"></div>
@@ -132,19 +113,27 @@
 
     </div>
 
-    <div v-show="show==3" class="room-list-panel" style="display: none">
+    <div v-show="show===3" class="room-list-panel" >
         <div class="room-main">
             <div class="room-left-content">
-                <div style="display: none;">
-                    <input class="input-text-custom" id="create-room-name"/>
-                    <button id="sure-create-room" class="button-custom">创建房间</button>
+                <div class="padding-c">
+                    <input placeholder="输入房间名字" class="input-text-custom" id="create-room-name"/>
+
+                    <div  class="game-type" v-bind:class="{'game-type-choose':roomList.twoPeople}" @click="chooseTwo(true)">双人</div>
+                    <div  class="game-type" v-bind:class="{'game-type-choose':!roomList.twoPeople}"  @click="chooseTwo(false)">四人</div>
+
+                    <button onclick="sureCreateRoom()" class="menu-button-custom">创建房间</button>
+                    <button class="menu-button-custom" @click="logout()">退出登录</button><!--onclick="sureCreateRoom()"-->
                 </div>
-                <button onclick="sureCreateRoom()">xx</button>
+                <!--<button >xx</button>-->
 
             </div>
             <div class="room-right-content">
+                <div class="room-list-head">
+                    房间列表
+                </div>
                 <div id="room-list">
-                    <div v-for="room in rooms" class="room-info-box">
+                    <div v-for="room in roomList.rooms" class="room-info-box" @click="joinRoom(room.roomName)">
                         <div style=" width: 50%;">{{ room.roomName }}</div>
                         <div style=" width: 20%">{{ room.currentPlayerCount }}/{{room.maxPlayerCount}}</div>
                         <div style=" width: 30%">{{ room.roomStatus }}</div>
@@ -154,12 +143,22 @@
                     <!--<div class="room-info-box"></div>-->
                 </div>
 
-
             </div>
 
         </div>
+    </div>
 
+    <div v-show="show===4" class="login-panel" >
+        <div class="room-main">
 
+            <div class="login-main">
+
+                <input id="account" style="margin-top: 30%" type="text" placeholder="输入账号" class="login-input"/>
+                <input id="password" type="password" placeholder="输入密码" class="login-input"/>
+                <div class="login-button" onclick="sureLogin()">登录</div>
+            </div>
+
+        </div>
     </div>
 
 
@@ -172,6 +171,7 @@
 <!--<script src="js/two.js"></script>-->
 <script src="js/online-version-2/BlokusCore.js"></script>
 <script src="js/online-version-2/BlokusController.js"></script>
+<script src="js/network/MessageFomatter.js"></script>
 <script src="js/online-version-2/BlokusUIController.js"></script>
 <script src="js/online-version-2/GameUIController.js"></script>
 <script src="js/network/Network.js"></script>

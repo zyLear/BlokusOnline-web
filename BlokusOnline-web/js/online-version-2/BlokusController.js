@@ -30,6 +30,11 @@ function BlokusController(chessMap, color) {
 
 
     this.judge = function (x, y, currentChessName) {
+
+        if (this.currentColor != this.myColor) {
+            return null;
+        }
+
         var currentChess = this.chessMap.get(currentChessName);
         if (currentChess == undefined) {
             return null;

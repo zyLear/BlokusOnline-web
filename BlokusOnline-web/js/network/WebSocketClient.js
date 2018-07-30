@@ -40,5 +40,5 @@ function connect() {
 
 
 function ping() {
-    window.webSocketClient.ws.send('{"content":"","msgType":1000}')
+    window.webSocketClient.ws.send('{"content":"","msgType":10000}')
 }
