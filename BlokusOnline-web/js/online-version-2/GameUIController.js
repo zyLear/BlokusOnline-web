@@ -31,6 +31,10 @@ function GameUIController() {
     this.tabController = new Vue({
         el: 'body',
         data: {
+            promptPanel: {
+                showPrompt: false,
+                promptMsg: ""
+            },
             blokusPanel: {
                 twoPeople: true
             },
@@ -88,5 +92,9 @@ function GameUIController() {
         window.webSocketClient.sendMessage(msg);
     };
 
+    this.showPromptMessage = function (msg) {
+        this.tabController.promptPanel.promptMsg = msg;
+        this.tabController.promptPanel.showPrompt = true;
+    };
 
 }

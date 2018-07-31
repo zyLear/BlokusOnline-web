@@ -214,6 +214,7 @@ function NetworkManager(gameUIController, blokusUIController) {
         var obj = JSON.parse(messageBean.content);
         var color = obj.color;
         this.blokusUIController.lose(color);
+        this.gameUIController.showPromptMessage(color + ' lose！');
     };
 
     this.leaveRoomResponse = function (messageBean) {
