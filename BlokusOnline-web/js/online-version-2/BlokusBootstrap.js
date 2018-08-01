@@ -11,8 +11,9 @@ function symmetry() {
     blokusUIController.symmetry();
 }
 
-function clickChooseChess(chessName) {
-    blokusUIController.clickChooseChess(chessName);
+function clickChooseChess(chessName, event) {
+    // alert(event.x+' s '+ event.y);
+    blokusUIController.clickChooseChess(chessName, event);
 }
 
 //
