@@ -11,7 +11,7 @@ function BlokusUIController() {
 
         var symmetryNode = $('<div id="symmetry' + chess.name + '"  ></div>');
 
-        var rotationNode = $('<div id="rotation' + chess.name + '" onmousedown="clickChooseChess(\'' + chess.name + '\')"></div>');
+        var rotationNode = $('<div id="rotation' + chess.name + '" onmousedown="clickChooseChess(\'' + chess.name + '\',event)"></div>');
 
         var emptyDiv = $('<div id="chooseButton' + chess.name + '" class="choose-chess-button" ></div>');
 
@@ -196,15 +196,17 @@ function BlokusUIController() {
     this.abs_x;
     this.abs_y;
 
-    this.clickChooseChess = function (chessName) {
+    this.clickChooseChess = function (chessName, event) {
         this.isMove = true;
         this.currentChessName = chessName;
         var obj = $('#combine' + this.currentChessName);
         // $('.choose-chess-button-relative').css('position')
         // obj.css('position', '');
-        obj.css('position', 'fixed');
+        obj.css({'position': 'fixed'});
         this.abs_x = obj.width() / 2;
         this.abs_y = obj.height() / 2;
+        this.moving(event.x, event.y)
+
     };
 
     this.moving = function (x, y) {
