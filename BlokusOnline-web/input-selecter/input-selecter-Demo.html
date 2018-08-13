@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>输入下拉框Demo</title>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="input-selecter.js"></script>
+    <link rel="stylesheet" href="input-selecter.css">
+</head>
+<!--<link rel="stylesheet" href="/spideradmin/resources/vendor/bootstrap/css/bootstrap.min.css"/>-->
+<!--<link rel="stylesheet" href="/spideradmin/resources/input-selecter/input-selecter.css" />-->
+
+<body style="margin-left: 60px;">
+
+<input id="need-select" type="text" class="form-control" style="width:250px;margin-top: 300px"/>
+
+</body>
+
+
+<script>
+    //数据数组
+    var data = [{
+        "nickName": "dsadsadsadsa",
+        "wechatAccount": "3"
+    }, {
+        "nickName": "sd",
+        "wechatAccount": "3"
+    }, {
+        "nickName": "sd",
+        "wechatAccount": "3"
+    }, {
+        "nickName": "sd",
+        "wechatAccount": "3"
+    }, {
+        "nickName": "sd",
+        "wechatAccount": "3"
+    }];
+
+    //初始化
+    var iSelecter = new SelecterInit();
+    //绑定一个 输入框
+    iSelecter.init("#need-select", function (value) {
+
+        var data = [{
+            "nickName": value,
+            "wechatAccount": "3"
+        }, {
+            "nickName": value,
+            "wechatAccount": "3"
+        }, {
+            "nickName": value,
+            "wechatAccount": "3"
+        }];
+        iSelecter.showOutSide(data);
+    });
+
+
+</script>
+
+</html>
