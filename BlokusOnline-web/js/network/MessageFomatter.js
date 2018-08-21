@@ -74,3 +74,12 @@ function formLogoutMsg() {
     msg.msgType = MsgType.LOGOUT;
     return msg;
 }
+
+function formLoseMsg(color) {
+    var msg = new Object();
+    msg.msgType = MsgType.LOSE;
+    var obj = new Object();
+    obj.color = color;
+    msg.content = JSON.stringify(obj);
+    return msg;
+}

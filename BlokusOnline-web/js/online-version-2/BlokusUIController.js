@@ -170,7 +170,15 @@ function BlokusUIController() {
                 $('.time-box').text(0);
                 return;
             }
-            alert(this.blokusUIController.blokusController.currentColor + ' lose');
+            // alert(this.blokusUIController.blokusController.currentColor + ' lose');
+
+            if (blokusUIController.currentColor == blokusUIController.myColor) {
+                var msg = formLoseMsg(this.blokusController.myColor);
+                webSocketClient.sendMessage(msg);
+            }else {
+                
+            }
+
             this.blokusUIController.lose(this.blokusUIController.blokusController.currentColor);
             $('.time-box').text(this.blokusUIController.deadline--);
 
