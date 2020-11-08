@@ -23,10 +23,10 @@ function BlokusController(chessMap) {
     this.chessMap = chessMap;
     this.allChess = this.init();
 
-    this.loseColor = [0, 0, 0, 0, 0];  //记录已经输了的颜色
+    this.finishColor = [0, 0, 0, 0, 0];  //记录已经输了的颜色
     this.currentColor = blue;    //当前下棋子的颜色
     this.myColor = 0;  //玩家的颜色
-    this.loseCount = 0;  //已经输的玩家的个数
+    this.finishCount = 0;  //已经输的玩家的个数
 
 
     this.judge = function (x, y, currentChessName) {
@@ -53,7 +53,7 @@ function BlokusController(chessMap) {
     };
 
     this.getNextColor = function (color) {
-        if (this.loseCount >= MAX_PLAYERS_COUNT) {
+        if (this.finishCount >= MAX_PLAYERS_COUNT) {
             return color;
         }
 
@@ -62,7 +62,7 @@ function BlokusController(chessMap) {
             if (color > MAX_PLAYERS_COUNT) {
                 color = 1;
             }
-        } while (this.loseColor[color] == 1);
+        } while (this.finishColor[color] == 1);
 
         return color;
     };
@@ -100,18 +100,18 @@ function BlokusController(chessMap) {
     };
 
 
-    this.lose = function (color) {
-        if (this.loseCount == MAX_PLAYERS_COUNT - 1) {
+    this.finish = function (color) {
+        if (this.finishCount == MAX_PLAYERS_COUNT - 1) {
             //color赢啦
             return this.currentColor;
         }
-        if (this.loseColor[color] == 1) {
+        if (this.finishColor[color] == 1) {
             //color已经输了，不能再输
             return this.currentColor;
         }
 
-        this.loseCount++;
-        this.loseColor[color] = 1;
+        this.finishCount++;
+        this.finishColor[color] = 1;
 
         // if (this.currentColor <= color) {
         //     firstFour--;

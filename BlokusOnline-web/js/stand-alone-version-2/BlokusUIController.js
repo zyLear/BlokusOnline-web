@@ -131,12 +131,12 @@ function BlokusUIController() {
     this.frameUpdate = function () {
 
         if (this.blokusUIController.deadline < 0) {
-            if (this.blokusUIController.blokusController.loseCount >= MAX_PLAYERS_COUNT - 1) {
+            if (this.blokusUIController.blokusController.finishCount >= MAX_PLAYERS_COUNT - 1) {
                 // this.blokusUIController.deadline = this.blokusUIController.defaulDeadline;
                 $('.time-box').text(0);
                 return;
             }
-            alert(this.blokusUIController.blokusController.currentColor + ' lose');
+            alert(this.blokusUIController.blokusController.currentColor + ' finish');
             this.blokusUIController.lose(this.blokusUIController.blokusController.currentColor);
             $('.time-box').text(this.blokusUIController.deadline--);
 

@@ -231,8 +231,8 @@ function BlokusUIController() {
         if (window.blokusUIController.deadline < 0) {
             $('.time-box').text(0);
 
-            //最后一位了  忽略
-            if (window.blokusUIController.blokusController.loseCount >= MAX_PLAYERS_COUNT - 1) {
+            //最后了  忽略
+            if (window.blokusUIController.blokusController.finishCount >= MAX_PLAYERS_COUNT ) {
                 return;
             }
 
@@ -243,9 +243,6 @@ function BlokusUIController() {
             } else {
 
             }
-
-            // this.blokusUIController.lose(this.blokusUIController.blokusController.currentColor);
-            // $('.time-box').text(this.blokusUIController.deadline--);
 
         } else {
             $('.time-box').text(window.blokusUIController.deadline--);
@@ -418,21 +415,23 @@ function BlokusUIController() {
 
 
     /**
-     * 页面其他显示  输了
+     * 页面其他显示  结束比赛
      *
      * @param color
      * @param msgType
+     * @param rank
      */
-    this.lose = function (color, msgType) {
-        if (this.blokusController.lose(color)) {
+    this.lose = function (color, msgType, rank) {
+        if (this.blokusController.finish(color)) {
             this.setCurrentColor();
             var name = this.getPlayerName(color);
+            var colorString = this.getColorString(color);
             if (MsgType.LOSE === msgType) {
-                $('#game-panel-content').append('<div> 玩家(' + name + ')输了！<div>');
+                $('#game-panel-content').append('<div>' + colorString + '玩家(' + name + ')输了！获得第' + rank + '名<div>');
             } else if (MsgType.GIVE_UP === msgType) {
-                $('#game-panel-content').append('<div> 玩家(' + name + ')认输了！<div>');
+                $('#game-panel-content').append('<div>' + colorString + '玩家(' + name + ')认输了！获得第' + rank + '名<div>');
             } else if (MsgType.GIVE_UP === msgType) {
-                $('#game-panel-content').append('<div> 玩家(' + name + ')离开房间！<div>');
+                $('#game-panel-content').append('<div>' + colorString + '玩家(' + name + ')离开房间！获得第' + rank + '名<div>');
             }
             this.deadline = this.defaulDeadline;
         }
@@ -443,23 +442,38 @@ function BlokusUIController() {
      * 页面其他显示  赢了
      *
      * @param color
+     * @param rank
      */
-    this.win = function (color) {
+    this.win = function (color, rank) {
         var name = this.getPlayerName(color);
-        $('#game-panel-content').append('<div> 玩家(' + name + ')赢了！<div>');
+        var colorString = this.getColorString(color);
+        this.blokusController.finish(color);
+        $('#game-panel-content').append('<div>' + colorString + '玩家(' + name + ')获得第' + rank + '名<div>');
     };
 
+    this.getColorString = function (color) {
+        if (color === 1) {
+            return '蓝色';
+        } else if (color === 2) {
+            return '绿色';
+        } else if (color === 3) {
+            return '红色';
+        } else if (color === 4) {
+            return '黄色';
+        }
+    };
 
     this.getPlayerName = function (color) {
         return this.playerNameMap.get(color);
     };
 
+
     this.setCurrentColor = function () {
-        $('.chessboard-parent').removeClass('border-1');
-        $('.chessboard-parent').removeClass('border-2');
-        $('.chessboard-parent').removeClass('border-3');
-        $('.chessboard-parent').removeClass('border-4');
-        $('.chessboard-parent').addClass('border-' + this.blokusController.currentColor);
+        $('#chessboard-parent').removeClass('border-1');
+        $('#chessboard-parent').removeClass('border-2');
+        $('#chessboard-parent').removeClass('border-3');
+        $('#chessboard-parent').removeClass('border-4');
+        $('#chessboard-parent').addClass('border-' + this.blokusController.currentColor);
 
         $('#current-color').removeClass();
         $('#current-color').addClass('current-color-' + this.blokusController.currentColor);

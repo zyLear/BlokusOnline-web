@@ -223,15 +223,17 @@ function NetworkManager(gameUIController, blokusUIController) {
     this.giveUp = function (messageBean) {
         var obj = JSON.parse(messageBean.content);
         var color = obj.color;
-        this.blokusUIController.lose(color, messageBean.msgType);
-        // this.gameUIController.showPromptMessage(color + ' lose！');
+        var rank = obj.rank;
+        this.blokusUIController.lose(color, messageBean.msgType, rank);
+        // this.gameUIController.showPromptMessage(color + ' finish！');
     };
 
     this.win = function (messageBean) {
         var obj = JSON.parse(messageBean.content);
         var color = obj.color;
-        this.blokusUIController.win(color);
-        // this.gameUIController.showPromptMessage(color + ' lose！');
+        var rank = obj.rank;
+        this.blokusUIController.win(color, rank);
+        // this.gameUIController.showPromptMessage(color + ' finish！');
     };
 
     this.leaveRoomResponse = function (messageBean) {

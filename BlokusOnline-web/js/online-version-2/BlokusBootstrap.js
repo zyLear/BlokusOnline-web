@@ -17,7 +17,7 @@ function clickChooseChess(chessName, event) {
 }
 
 //
-// function lose() {
+// function finish() {
 //     blokusUIController.giveUp();
 // }
 

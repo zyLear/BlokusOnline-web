@@ -33,22 +33,22 @@ function BlokusController(chessMap, color) {
     this.chessMap = chessMap;
     this.allChess = this.init();
 
-    this.loseColor = [0, 0, 0, 0, 0];  //记录已经输了的颜色
+    this.finishColor = [0, 0, 0, 0, 0];  //记录已经结束比赛棋子的颜色
     this.currentColor = blue;    //当前下棋子的颜色
     this.myColor = color;  //玩家的颜色
-    this.loseCount = 0;  //已经输的玩家的个数
+    this.finishCount = 0;  //已经结束比赛的玩家的个数
 
 
     this.judge = function (x, y, currentChessName) {
 
-        if (this.currentColor != this.myColor) {
+        if (this.currentColor !== this.myColor) {
             return null;
         }
 
         var currentChess = this.chessMap.get(currentChessName);
-        if (currentChess == undefined) {
+        if (currentChess === undefined) {
             return null;
-        } else if (currentChess.color != this.currentColor) {
+        } else if (currentChess.color !== this.currentColor) {
             return null;
         } else {
             var blokusParam = new BlokusParam(x, y, this.allChess, currentChess.model, currentChess.color);
@@ -68,7 +68,7 @@ function BlokusController(chessMap, color) {
     };
 
     this.getNextColor = function (color) {
-        if (this.loseCount >= MAX_PLAYERS_COUNT) {
+        if (this.finishCount >= MAX_PLAYERS_COUNT) {
             return color;
         }
 
@@ -77,7 +77,7 @@ function BlokusController(chessMap, color) {
             if (color > MAX_PLAYERS_COUNT) {
                 color = 1;
             }
-        } while (this.loseColor[color] == 1);
+        } while (this.finishColor[color] === 1);
 
         return color;
     };
@@ -85,7 +85,7 @@ function BlokusController(chessMap, color) {
     this.updateChess = function (x, y, model, color) {
         for (var j = 0; j < 5; j++) {
             for (var i = 0; i < 5; i++) {
-                if (model[j][i] == 1) {
+                if (model[j][i] === 1) {
                     var wx = x - 2 + i;
                     var wy = y - 2 + j;
                     this.allChess[wx][wy] = color;
@@ -115,20 +115,20 @@ function BlokusController(chessMap, color) {
     };
 
 
-    this.lose = function (color) {
-        if (this.loseCount === MAX_PLAYERS_COUNT - 1) {
+    this.finish = function (color) {
+        if (this.finishCount === MAX_PLAYERS_COUNT) {
             //color赢啦
             // return this.currentColor;
             return false
         }
-        if (this.loseColor[color] === 1) {
+        if (this.finishColor[color] === 1) {
             //color已经输了，不能再输
             // return this.currentColor;
             return false;
         }
 
-        this.loseCount++;
-        this.loseColor[color] = 1;
+        this.finishCount++;
+        this.finishColor[color] = 1;
 
         // if (this.currentColor <= color) {
         //     firstFour--;
