@@ -3,6 +3,16 @@ function BlokusControllerJudgeResult(blokusJudgeResult, chess) {
     this.chess = chess;
 }
 
+/**
+ * 记录本局棋局的状态信息
+ *
+ * 比如输了颜色  当前下棋颜色
+ *
+ *
+ * @param chessMap
+ * @param color
+ * @constructor
+ */
 function BlokusController(chessMap, color) {
 
 
@@ -86,7 +96,7 @@ function BlokusController(chessMap, color) {
 
     this.rotation = function (currentChessName) {
         var currentChess = this.chessMap.get(currentChessName);
-        if (currentChess == undefined) {
+        if (currentChess === undefined) {
             return -1;
         } else {
             currentChess.rotation();
@@ -97,7 +107,7 @@ function BlokusController(chessMap, color) {
 
     this.symmetry = function (currentChessName) {
         var currentChess = this.chessMap.get(currentChessName);
-        if (currentChess == undefined) {
+        if (currentChess === undefined) {
             return -1;
         }
         currentChess.symmetry();
@@ -106,13 +116,15 @@ function BlokusController(chessMap, color) {
 
 
     this.lose = function (color) {
-        if (this.loseCount == MAX_PLAYERS_COUNT - 1) {
+        if (this.loseCount === MAX_PLAYERS_COUNT - 1) {
             //color赢啦
-            return this.currentColor;
+            // return this.currentColor;
+            return false
         }
-        if (this.loseColor[color] == 1) {
+        if (this.loseColor[color] === 1) {
             //color已经输了，不能再输
-            return this.currentColor;
+            // return this.currentColor;
+            return false;
         }
 
         this.loseCount++;
@@ -121,10 +133,11 @@ function BlokusController(chessMap, color) {
         // if (this.currentColor <= color) {
         //     firstFour--;
         // }
-        if (color == this.currentColor) {
+        if (color === this.currentColor) {
             this.currentColor = this.getNextColor(color);
         }
-        return this.currentColor
+        // return this.currentColor
+        return true;
     }
 
 

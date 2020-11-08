@@ -10,6 +10,10 @@ function GameUIController() {
     this.sureCreateRoom = function () {
         // alert('df');
         var roomName = $('#create-room-name').val();
+        if (roomName == '') {
+            window.alert('房间名字不能为空！');
+            return;
+        }
         var gameType = this.tabController.roomList.twoPeople ? 2 : 1;
         var msg = formCreateRoomMsg(roomName, gameType);
 
@@ -25,11 +29,12 @@ function GameUIController() {
     //     el: '#room-name',
     //     data: {
     //         message: "room name"
+
     //     }
     // });
 
     this.tabController = new Vue({
-        el: 'body',
+        el: '#page-main',
         data: {
             promptPanel: {
                 showPrompt: false,

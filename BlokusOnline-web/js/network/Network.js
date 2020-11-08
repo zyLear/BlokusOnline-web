@@ -79,7 +79,7 @@ function WebSocketClient() {
     this.webSocket = undefined;
 
     this.connect = function () {
-        if (this.webSocket != undefined) {
+        if (this.webSocket !== undefined) {
             return;
         }
 
@@ -146,8 +146,12 @@ function NetworkManager(gameUIController, blokusUIController) {
             case MsgType.START_BLOKUS:
                 this.startBlokus(messageBean);
                 break;
+            case MsgType.LOSE:
             case MsgType.GIVE_UP:
                 this.giveUp(messageBean);
+                break;
+            case MsgType.WIN:
+                this.win(messageBean);
                 break;
             case MsgType.LEAVE_ROOM_RESPONSE:
                 this.leaveRoomResponse(messageBean);
@@ -159,7 +163,7 @@ function NetworkManager(gameUIController, blokusUIController) {
 
     this.loginResponse = function (messageBean) {
         var object = JSON.parse(messageBean.content);
-        if (object.errorCode == 0) {
+        if (object.errorCode === 0) {
             gameUIController.tabController.show = 3;
             window.webSocketClient.webSocket.send('{"msgType":16,"content":""}')
         } else {
@@ -169,9 +173,14 @@ function NetworkManager(gameUIController, blokusUIController) {
 
     this.roomResponse = function (messageBean) {
         var object = JSON.parse(messageBean.content);
-        if (object.errorCode == 0) {
+        if (object.errorCode === 0) {
             this.gameUIController.tabController.roomPlayersInfo.roomName = object.roomName;
             this.gameUIController.tabController.show = 2;
+            if (object.gameType === 1) {
+                this.gameUIController.tabController.blokusPanel.twoPeople = false;
+            } else {
+                this.gameUIController.tabController.blokusPanel.twoPeople = true;
+            }
         } else {
             alert('create room fail');
         }
@@ -197,7 +206,8 @@ function NetworkManager(gameUIController, blokusUIController) {
         var obj = JSON.parse(messageBean.content);
         var color = obj.color;
         var gameType = obj.gameType;
-        if (gameType == 1) {
+        var playerList = obj.playerList;
+        if (gameType === 1) {
             MAX_PLAYERS_COUNT = 4;
             MAX_ROW_AND_COLUMN = 20;
             this.gameUIController.tabController.blokusPanel.twoPeople = false;
@@ -206,15 +216,22 @@ function NetworkManager(gameUIController, blokusUIController) {
             MAX_PLAYERS_COUNT = 2;
             MAX_ROW_AND_COLUMN = 14;
         }
-        this.blokusUIController.start(color);
+        this.blokusUIController.start(color, playerList);
         this.gameUIController.tabController.show = 1;
     };
 
     this.giveUp = function (messageBean) {
         var obj = JSON.parse(messageBean.content);
         var color = obj.color;
-        this.blokusUIController.lose(color);
-        this.gameUIController.showPromptMessage(color + ' lose！');
+        this.blokusUIController.lose(color, messageBean.msgType);
+        // this.gameUIController.showPromptMessage(color + ' lose！');
+    };
+
+    this.win = function (messageBean) {
+        var obj = JSON.parse(messageBean.content);
+        var color = obj.color;
+        this.blokusUIController.win(color);
+        // this.gameUIController.showPromptMessage(color + ' lose！');
     };
 
     this.leaveRoomResponse = function (messageBean) {

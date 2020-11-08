@@ -108,7 +108,7 @@ function BlokusUIController() {
         var chessboard = $('.chessboard');
         for (var i = 0; i < 20; i++) {
             for (var j = 0; j < 20; j++) {
-                var chess = $('<div class="chess-box-game" "></div>');
+                var chess = $('<div class="chess-box-game"><div class="chess-box-inner"></div></div>');
                 //onclick="chessDown(this)
                 var id = j + 'x' + i;
                 chess.attr('id', id);

@@ -8,7 +8,17 @@ var green = 2;
 var red = 3;
 var yellow = 4;
 
-
+/**
+ * 棋子基本信息的定义 配合显示用
+ *
+ *
+ * @param name
+ * @param color
+ * @param model
+ * @param rotationFlag
+ * @param symmetryFlag
+ * @constructor
+ */
 function Chess(name, color, model, rotationFlag, symmetryFlag) {
     this.name = name;
     this.color = color;
@@ -112,6 +122,13 @@ function BlokusJudgeResult(x, y, result) {
 }
 
 
+/**
+ *
+ * 根据入参判断是否能下  纯逻辑  跟页面显示无关
+ *
+ * @param blokusParam
+ * @returns {BlokusJudgeResult}
+ */
 function judge(blokusParam) {
 
 

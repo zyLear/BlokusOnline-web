@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="css/blokus.css">
     <link rel="stylesheet" href="css/ui-page.css">
 
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -31,9 +35,24 @@
                 <button class="button-custom" onclick="symmetry()">对称</button>
                 <button class="button-custom" @click="giveUp()">认输</button>
                 <button class="button-custom" @click="backToRoomPanel()">返回</button>
-            </div>
 
-            <div class="chessboard"></div>
+
+                <div id="game-panel">
+                    <div>游戏开始</div>
+                    <div id="game-panel-content"></div>
+                </div>
+
+            </div>
+            <div style="float: left">
+                <div id="chessboard-parent" class="border-1">
+                    <div class="chessboard "></div>
+                </div>
+                <div style="text-align: center">
+                    <h3>当前下棋颜色：</h3>
+                    <div id="current-color" class="current-color-1">
+                    </div>
+                </div>
+            </div>
             <input name="content-right-radio" id="content-right-radio-1" checked="checked" type="radio"
                    class="custom-hide"/>
             <div class="content-right-1">
@@ -69,8 +88,10 @@
                     <div class="color-button-box">
                         <button class="color-button-green" onclick="chooseColor(2)"></button>
                         <button class="color-button-blue" onclick="chooseColor(1)"></button>
-                        <button class="color-button-red" onclick="chooseColor(3)"></button>
-                        <button class="color-button-yellow" onclick="chooseColor(4)"></button>
+                        <button class="color-button-red" v-bind:class="{'custom-hide':blokusPanel.twoPeople}"
+                                onclick="chooseColor(3)"></button>
+                        <button class="color-button-yellow" v-bind:class="{'custom-hide':blokusPanel.twoPeople}"
+                                onclick="chooseColor(4)"></button>
                     </div>
                 </div>
                 <div class="block-bottom">
@@ -88,25 +109,62 @@
 
             <div class="room-right-content">
                 <div class="block-top">
-                    <table id="roomPlayersInfo" class="player-choose-info">
-                        <tr>
-                            <th colspan="3">{{roomPlayersInfo.roomName}}</th>
-                        </tr>
-                        <tr>
-                            <th>名字</th>
-                            <th>选择颜色</th>
-                            <th>准备状态</th>
-                        </tr>
-                        <tr v-for="item in roomPlayersInfo.items">
+                    <!--                    <table id="roomPlayersInfo" class="player-choose-info" >-->
+                    <!--                        <tr style="height: 20px">-->
+                    <!--                            <th colspan="3">{{roomPlayersInfo.roomName}}</th>-->
+                    <!--                        </tr>-->
+                    <!--                        <tr>-->
+                    <!--                            <th>账号</th>-->
+                    <!--                            <th>选择颜色</th>-->
+                    <!--                            <th>准备状态</th>-->
+                    <!--                        </tr>-->
+                    <!--                        <tr v-for="item in roomPlayersInfo.items">-->
 
-                            <td>{{ item.account }}</td>
-                            <td>{{ item.color }}</td>
-                            <td>{{ item.isReady }}</td>
+                    <!--                            <td>{{ item.account }}</td>-->
+                    <!--                            <td>{{ item.color }}</td>-->
+                    <!--                            <td>{{ item.isReady }}</td>-->
 
-                        </tr>
-                    </table>
+                    <!--                        </tr>-->
+                    <!--                    </table>-->
+                    <div style="padding: 40px 40px 40px">
+
+                        <div class="prompt-text"><h3>{{roomPlayersInfo.roomName}}</h3></div>
+
+                        <el-table
+                                :data="roomPlayersInfo.items"
+                                border
+                                style="width: 100%;font-size: 20px;text-align: center">
+                            <el-table-column
+                                    prop="account"
+                                    label="账号">
+                            </el-table-column>
+                            <el-table-column
+                                    label="颜色">
+
+                                <template slot-scope="scope">
+                                    <div class="color-block-1" v-bind:class="{'custom-hide':scope.row.color !=1}"></div>
+                                    <div class="color-block-2" v-bind:class="{'custom-hide':scope.row.color !=2}"></div>
+                                    <div class="color-block-3" v-bind:class="{'custom-hide':scope.row.color !=3}"></div>
+                                    <div class="color-block-4" v-bind:class="{'custom-hide':scope.row.color !=4}"></div>
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    label="准备状态">
+                                <template slot-scope="scope">
+                                    <img style=" width: 35px; height: 35px;" src="images/yes.png"
+                                         v-bind:class="{'custom-hide':!scope.row.isReady}">
+                                    <img style=" width: 35px; height: 35px;" src="images/no.png"
+                                         v-bind:class="{'custom-hide':scope.row.isReady}">
+                                </template>
+                            </el-table-column>
+                        </el-table>
+
+                    </div>
                 </div>
-                <div class="block-bottom"></div>
+                <div class="block-bottom">
+
+
+                </div>
             </div>
         </div>
 
@@ -126,7 +184,8 @@
                     </div>
 
                     <button onclick="sureCreateRoom()" class="menu-button-custom">创建房间</button>
-                    <button class="menu-button-custom" @click="logout()">退出登录</button><!--onclick="sureCreateRoom()"-->
+                    <button class="menu-button-custom" @click="logout()">退出登录</button>
+                    <!--onclick="sureCreateRoom()"-->
                 </div>
                 <!--<button >xx</button>-->
 
@@ -163,7 +222,7 @@
 
         </div>
     </div>
-    
+
 
     <div class="prompt-panel" v-bind:class="{'custom-hide':!promptPanel.showPrompt}">
         <div class="prompt-div">
@@ -171,14 +230,20 @@
         </div>
     </div>
 
-
 </div>
 
 
 <!--<script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>-->
 <script src="vendor/jquery190.min.js"></script>
-<script src="vendor/vue108.min.js"></script>
+<!--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>-->
+<!--<script src="vendor/vue108.min.js"></script>-->
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
 <!--<script src="js/two.js"></script>-->
+
 <script src="js/online-version-2/BlokusCore.js"></script>
 <script src="js/online-version-2/BlokusController.js"></script>
 <script src="js/network/MessageFomatter.js"></script>
@@ -187,6 +252,7 @@
 <script src="js/network/Network.js"></script>
 <script src="js/online-version-2/BlokusBootstrap.js"></script>
 
+</div>
 </body>
 
 </html>
