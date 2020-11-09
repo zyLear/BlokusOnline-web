@@ -66,8 +66,5 @@ $(function () {
     webSocketClient.connect();
 
 
-    var msg = formLoginMsg('aaa', 'aaa');
-    window.webSocketClient.sendMessage(msg);
-
 
 });

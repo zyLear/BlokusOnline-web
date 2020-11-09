@@ -51,13 +51,16 @@ function GameUIController() {
             roomPlayersInfo: {
                 items: [],
                 roomName: ''
-            }
+            },
+            account: '',
+            guestLoginVisible: true,
+            guestAccount:''
         }, methods: {
             joinRoom: function (roomName) {
-                var msg = formJoinRoomMsg(roomName);
+                let msg = formJoinRoomMsg(roomName);
                 webSocketClient.sendMessage(msg);
             }, backToRoomListPanel: function () {
-                var msg = formLeaveRoomMsg();
+                let msg = formLeaveRoomMsg();
                 webSocketClient.sendMessage(msg);
             }, backToRoomPanel: function () {
                 blokusUIController.giveUp();
@@ -66,11 +69,17 @@ function GameUIController() {
             }, giveUp: function () {
                 blokusUIController.giveUp();
             }, logout: function () {
-                var msg = formLogoutMsg();
+                let msg = formLogoutMsg();
                 webSocketClient.sendMessage(msg);
                 gameUIController.tabController.show = 4;
             }, chooseTwo: function (msg) {
                 gameUIController.tabController.roomList.twoPeople = msg;
+            }, sureGuestLogin: function () {
+                let account = gameUIController.tabController.guestAccount;
+                let message = formGuestLoginMsg(account);
+                webSocketClient.sendMessage(message);
+                gameUIController.tabController.guestLoginVisible = false
+
             }
         }
 

@@ -55,6 +55,8 @@ MsgType.LEAVE_ROOM_RESPONSE = 27;
 
 MsgType.REGISTER_RESPONSE = 28;
 
+MsgType.GUEST_LOGIN = 29;
+
 
 MsgType.PING = 10000;
 
@@ -162,9 +164,10 @@ function NetworkManager(gameUIController, blokusUIController) {
     };
 
     this.loginResponse = function (messageBean) {
-        var object = JSON.parse(messageBean.content);
-        if (object.errorCode === 0) {
-            gameUIController.tabController.show = 3;
+        let object = JSON.parse(messageBean.content);
+        if (object.code === 0) {
+            this.gameUIController.tabController.show = 3;
+            this.gameUIController.tabController.account = object.message;
             window.webSocketClient.webSocket.send('{"msgType":16,"content":""}')
         } else {
             alert('login fail');
@@ -173,7 +176,7 @@ function NetworkManager(gameUIController, blokusUIController) {
 
     this.roomResponse = function (messageBean) {
         var object = JSON.parse(messageBean.content);
-        if (object.errorCode === 0) {
+        if (object.code === 0) {
             this.gameUIController.tabController.roomPlayersInfo.roomName = object.roomName;
             this.gameUIController.tabController.show = 2;
             if (object.gameType === 1) {

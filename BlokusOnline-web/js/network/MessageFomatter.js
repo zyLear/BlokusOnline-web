@@ -8,6 +8,15 @@ function formLoginMsg(account, password) {
     return msg;
 }
 
+function formGuestLoginMsg(account) {
+    var msg = new Object();
+    msg.msgType = MsgType.GUEST_LOGIN;
+    var obj = new Object();
+    obj.account = account;
+    msg.content = JSON.stringify(obj);
+    return msg;
+}
+
 function formCreateRoomMsg(roomName, gameType) {
     var msg = new Object();
     msg.msgType = MsgType.CREATE_ROOM;
