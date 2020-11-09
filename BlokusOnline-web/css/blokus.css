@@ -17,13 +17,13 @@ body {
 }
 
 .content-main {
-    width: 1458px;
+    width: 2458px;  /*1458px;*/
     height: 840px;
     margin: 0 auto;
 }
 
 .content-main-two {
-    width: 1168px;
+    width: 2168px;   /*1168px;*/
 }
 
 .chessboard {
@@ -206,7 +206,7 @@ input:checked + div {
 }
 
 .content-right-1 {
-    width: 247px;
+    width: 880px;  /*width: 247px;*/
     height: 840px;
     border: 1px solid green;
     background-color: white;
@@ -220,7 +220,7 @@ input:checked + div {
 }
 
 .content-right-2 {
-    width: 247px;
+    width: 880px;  /*width: 247px;*/
     height: 840px;
     border: 1px solid green;
     background-color: white;
@@ -234,7 +234,7 @@ input:checked + div {
 }
 
 .content-right-3 {
-    width: 247px;
+    width: 880px;  /*width: 247px;*/
     height: 840px;
     border: 1px solid green;
     background-color: white;
@@ -248,7 +248,7 @@ input:checked + div {
 }
 
 .content-right-4 {
-    width: 247px;
+    width: 880px;  /*width: 247px;*/
     height: 840px;
     border: 1px solid green;
     background-color: white;
@@ -278,9 +278,10 @@ input:checked + div {
     width: 210px;
     height: 210px;
     border: 1px solid green;
-    background-color:  #b6b7b9;
+    background-color: #b6b7b9;
     /*margin-left: 25px;*/
-    margin: 10px auto;
+    margin: 1px 1px; /* margin: 10px auto;*/
+    float: left;
     /*overflow: hidden;*/
     /*-webkit-animation: spin 2s linear infinite;*/
     /*animation: spin 2s linear infinite;*/

@@ -85,7 +85,8 @@ function WebSocketClient() {
             return;
         }
 
-        this.webSocket = new WebSocket("ws://localhost:19090/blokus");
+        this.webSocket = new WebSocket("ws://115.159.110.27:19090/blokus");
+        // this.webSocket = new WebSocket("ws://localhost:19090/blokus");
 
         this.webSocket.onopen = function () {
             //  alert("连接成功");

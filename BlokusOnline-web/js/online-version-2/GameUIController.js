@@ -53,7 +53,7 @@ function GameUIController() {
                 roomName: ''
             },
             account: '',
-            guestLoginVisible: true,
+            guestLoginVisible: false,
             guestAccount:''
         }, methods: {
             joinRoom: function (roomName) {

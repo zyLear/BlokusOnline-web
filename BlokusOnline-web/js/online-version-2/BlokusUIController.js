@@ -16,7 +16,7 @@
 function BlokusUIController() {
 
 
-    this.defaulDeadline = 15;
+    this.defaulDeadline = 120;
     this.deadline = null;
 
     //每次棋局start设置
@@ -168,6 +168,193 @@ function BlokusUIController() {
         this.formChooseChess(chess4);
         chessMap.set(name4, chess4);
 
+        var model5 = new Array(5);
+        model5[0] = [0, 0, 0, 0, 0];
+        model5[1] = [0, 1, 1, 1, 0];
+        model5[2] = [0, 0, 1, 0, 0];
+        model5[3] = [0, 0, 1, 0, 0];
+        model5[4] = [0, 0, 0, 0, 0];
+        var name5 = color + '_' + 5;
+        var chess5 = new Chess(name5, color, model5, 0, 0);
+        this.formChooseChess(chess5);
+        chessMap.set(name5, chess5);
+
+        var model6 = new Array(5);
+        model6[0] = [0, 0, 0, 0, 0];
+        model6[1] = [0, 0, 0, 0, 0];
+        model6[2] = [1, 1, 1, 1, 0];
+        model6[3] = [0, 0, 0, 0, 0];
+        model6[4] = [0, 0, 0, 0, 0];
+        var name6 = color + '_' + 6;
+        var chess6 = new Chess(name6, color, model6, 0, 0);
+        this.formChooseChess(chess6);
+        chessMap.set(name6, chess6);
+
+        var model7 = new Array(5);
+        model7[0] = [0, 0, 0, 0, 0];
+        model7[1] = [0, 0, 0, 0, 0];
+        model7[2] = [1, 1, 1, 1, 1];
+        model7[3] = [0, 0, 0, 0, 0];
+        model7[4] = [0, 0, 0, 0, 0];
+        var name7 = color + '_' + 7;
+        var chess7 = new Chess(name7, color, model7, 0, 0);
+        this.formChooseChess(chess7);
+        chessMap.set(name7, chess7);
+
+        var model8 = new Array(5);
+        model8[0] = [0, 0, 0, 0, 0];
+        model8[1] = [0, 0, 0, 0, 0];
+        model8[2] = [1, 1, 1, 1, 0];
+        model8[3] = [0, 0, 1, 0, 0];
+        model8[4] = [0, 0, 0, 0, 0];
+        var name8 = color + '_' + 8;
+        var chess8 = new Chess(name8, color, model8, 0, 0);
+        this.formChooseChess(chess8);
+        chessMap.set(name8, chess8);
+
+        var model9 = new Array(5);
+        model9[0] = [0, 0, 0, 0, 0];
+        model9[1] = [0, 0, 0, 0, 0];
+        model9[2] = [1, 1, 1, 0, 0];
+        model9[3] = [0, 0, 1, 1, 0];
+        model9[4] = [0, 0, 0, 0, 0];
+        var name9 = color + '_' + 9;
+        var chess9 = new Chess(name9, color, model9, 0, 0);
+        this.formChooseChess(chess9);
+        chessMap.set(name9, chess9);
+
+        var model10 = new Array(5);
+        model10[0] = [0, 0, 0, 0, 0];
+        model10[1] = [0, 0, 1, 0, 0];
+        model10[2] = [0, 0, 1, 0, 0];
+        model10[3] = [0, 0, 1, 1, 0];
+        model10[4] = [0, 0, 0, 0, 0];
+        var name10 = color + '_' + 10;
+        var chess10 = new Chess(name4, color, model10, 0, 0);
+        this.formChooseChess(chess10);
+        chessMap.set(name10, chess10);
+
+        var model11 = new Array(5);
+        model11[0] = [0, 0, 0, 0, 0];
+        model11[1] = [0, 0, 1, 0, 0];
+        model11[2] = [0, 0, 1, 1, 0];
+        model11[3] = [0, 0, 0, 1, 0];
+        model11[4] = [0, 0, 0, 0, 0];
+        var name11 = color + '_' + 11;
+        var chess11 = new Chess(name11, color, model11, 0, 0);
+        this.formChooseChess(chess11);
+        chessMap.set(name11, chess11);
+
+        var model12 = new Array(5);
+        model12[0] = [0, 0, 0, 0, 0];
+        model12[1] = [0, 0, 1, 0, 0];
+        model12[2] = [0, 0, 1, 1, 0];
+        model12[3] = [0, 0, 1, 1, 0];
+        model12[4] = [0, 0, 0, 0, 0];
+        var name12 = color + '_' + 12;
+        var chess12 = new Chess(name12, color, model12, 0, 0);
+        this.formChooseChess(chess12);
+        chessMap.set(name12, chess12);
+
+        var model13 = new Array(5);
+        model13[0] = [0, 0, 0, 0, 0];
+        model13[1] = [0, 1, 0, 0, 0];
+        model13[2] = [0, 1, 0, 0, 0];
+        model13[3] = [0, 1, 1, 1, 0];
+        model13[4] = [0, 0, 0, 0, 0];
+        var name13 = color + '_' + 13;
+        var chess13 = new Chess(name13, color, model13, 0, 0);
+        this.formChooseChess(chess13);
+        chessMap.set(name13, chess13);
+
+        var model14 = new Array(5);
+        model14[0] = [0, 0, 0, 0, 0];
+        model14[1] = [0, 1, 1, 0, 0];
+        model14[2] = [0, 0, 1, 0, 0];
+        model14[3] = [0, 0, 1, 1, 0];
+        model14[4] = [0, 0, 0, 0, 0];
+        var name14 = color + '_' + 14;
+        var chess14 = new Chess(name14, color, model14, 0, 0);
+        this.formChooseChess(chess14);
+        chessMap.set(name14, chess14);
+
+        var model15 = new Array(5);
+        model15[0] = [0, 0, 0, 0, 0];
+        model15[1] = [0, 0, 1, 1, 0];
+        model15[2] = [0, 0, 1, 1, 0];
+        model15[3] = [0, 0, 0, 0, 0];
+        model15[4] = [0, 0, 0, 0, 0];
+        var name15 = color + '_' + 15;
+        var chess15 = new Chess(name15, color, model15, 0, 0);
+        this.formChooseChess(chess15);
+        chessMap.set(name15, chess15);
+
+        var model16 = new Array(5);
+        model16[0] = [0, 0, 0, 0, 0];
+        model16[1] = [0, 1, 0, 1, 0];
+        model16[2] = [0, 1, 1, 1, 0];
+        model16[3] = [0, 0, 0, 0, 0];
+        model16[4] = [0, 0, 0, 0, 0];
+        var name16 = color + '_' + 16;
+        var chess16 = new Chess(name16, color, model16, 0, 0);
+        this.formChooseChess(chess16);
+        chessMap.set(name16, chess16);
+
+        var model17 = new Array(5);
+        model17[0] = [0, 0, 0, 0, 0];
+        model17[1] = [0, 0, 0, 0, 0];
+        model17[2] = [0, 1, 1, 1, 0];
+        model17[3] = [0, 0, 0, 0, 0];
+        model17[4] = [0, 0, 0, 0, 0];
+        var name17 = color + '_' + 17;
+        var chess17 = new Chess(name4, color, model17, 0, 0);
+        this.formChooseChess(chess17);
+        chessMap.set(name17, chess17);
+
+        var model18 = new Array(5);
+        model18[0] = [0, 0, 0, 0, 0];
+        model18[1] = [0, 0, 0, 0, 0];
+        model18[2] = [0, 1, 1, 0, 0];
+        model18[3] = [0, 0, 0, 0, 0];
+        model18[4] = [0, 0, 0, 0, 0];
+        var name18 = color + '_' + 18;
+        var chess18 = new Chess(name18, color, model18, 0, 0);
+        this.formChooseChess(chess18);
+        chessMap.set(name18, chess18);
+
+        var model19 = new Array(5);
+        model19[0] = [0, 0, 0, 0, 0];
+        model19[1] = [0, 1, 0, 0, 0];
+        model19[2] = [0, 1, 1, 0, 0];
+        model19[3] = [0, 0, 1, 1, 0];
+        model19[4] = [0, 0, 0, 0, 0];
+        var name19 = color + '_' + 19;
+        var chess19 = new Chess(name19, color, model19, 0, 0);
+        this.formChooseChess(chess19);
+        chessMap.set(name19, chess19);
+
+        var model20 = new Array(5);
+        model20[0] = [0, 0, 0, 0, 0];
+        model20[1] = [0, 0, 0, 0, 0];
+        model20[2] = [1, 1, 1, 1, 0];
+        model20[3] = [0, 0, 0, 1, 0];
+        model20[4] = [0, 0, 0, 0, 0];
+        var name20 = color + '_' + 20;
+        var chess20 = new Chess(name20, color, model20, 0, 0);
+        this.formChooseChess(chess20);
+        chessMap.set(name20, chess20);
+
+        var model21 = new Array(5);
+        model21[0] = [0, 0, 0, 0, 0];
+        model21[1] = [0, 0, 0, 0, 0];
+        model21[2] = [0, 0, 1, 0, 0];
+        model21[3] = [0, 0, 0, 0, 0];
+        model21[4] = [0, 0, 0, 0, 0];
+        var name21 = color + '_' + 21;
+        var chess21 = new Chess(name21, color, model21, 0, 0);
+        this.formChooseChess(chess21);
+        chessMap.set(name21, chess21);
+
     };
 
 
@@ -232,7 +419,7 @@ function BlokusUIController() {
             $('.time-box').text(0);
 
             //最后了  忽略
-            if (window.blokusUIController.blokusController.finishCount >= MAX_PLAYERS_COUNT ) {
+            if (window.blokusUIController.blokusController.finishCount >= MAX_PLAYERS_COUNT) {
                 return;
             }
 
