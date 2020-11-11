@@ -34,9 +34,16 @@ function BlokusUIController() {
     this.start = function (color, playerList) {
         this.deadline = this.defaulDeadline;
 
-        $(document).mouseup(function (event) {
+        // $(document).mouseup(function (event) {
+        //     blokusUIController.mouseUp(event.pageX, event.pageY);
+        // });
+        $(document).click(function (event) {
             blokusUIController.mouseUp(event.pageX, event.pageY);
+            // console.log('xxxx')
+            console.log('a')
         });
+
+
 
         $(document).mousemove(function (event) {
             blokusUIController.moving(event.pageX, event.pageY);
@@ -89,7 +96,7 @@ function BlokusUIController() {
 
         var symmetryNode = $('<div id="symmetry' + chess.name + '"  ></div>');
 
-        var rotationNode = $('<div id="rotation' + chess.name + '" onmousedown="clickChooseChess(\'' + chess.name + '\',event)"></div>');
+        var rotationNode = $('<div id="rotation' + chess.name + '" onclick="clickChooseChess(\'' + chess.name + '\',event)"></div>');
 
         var emptyDiv = $('<div id="chooseButton' + chess.name + '" class="choose-chess-button" ></div>');
 
@@ -108,7 +115,7 @@ function BlokusUIController() {
 
         for (var i = 0; i < 5; i++) {
             for (var j = 0; j < 5; j++) {
-                if (chess.model[i][j] == 1) {
+                if (chess.model[i][j] === 1) {
                     backDiv.append('<div  class="chess-box" > </div>');
                     frontChessDiv.append('<div  class="chess-box-hide" > <div class="chess-' + chess.color + '"></div></div>');
                 } else {
@@ -458,16 +465,21 @@ function BlokusUIController() {
 
 
     this.clickChooseChess = function (chessName, event) {
-        this.isMove = true;
-        this.currentChessName = chessName;
-        var obj = $('#combine' + this.currentChessName);
-        // $('.choose-chess-button-relative').css('position')
-        // obj.css('position', '');
-        obj.css({'position': 'fixed'});
-        this.abs_x = obj.width() / 2;
-        this.abs_y = obj.height() / 2;
-        this.moving(event.x, event.y)
-
+        //如果不是在移动中
+        if (!this.isMove) {
+            this.isMove = true;
+            this.currentChessName = chessName;
+            var obj = $('#combine' + this.currentChessName);
+            // $('.choose-chess-button-relative').css('position')
+            // obj.css('position', '');
+            obj.css({'position': 'fixed'});
+            this.abs_x = obj.width() / 2;
+            this.abs_y = obj.height() / 2;
+            this.moving(event.x, event.y);
+            console.log('cc');
+            //取消点击事件的父元素传播
+            event.stopPropagation();
+        }
     };
 
     this.moving = function (x, y) {
