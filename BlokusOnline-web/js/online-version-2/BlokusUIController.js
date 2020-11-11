@@ -37,26 +37,26 @@ function BlokusUIController() {
         // $(document).mouseup(function (event) {
         //     blokusUIController.mouseUp(event.pageX, event.pageY);
         // });
-        $(document).click(function (event) {
+        $(document).mousedown(function (event) {
+            console.log("click");
             blokusUIController.mouseUp(event.pageX, event.pageY);
         });
 
 
+        // $(document).mousemove(function (event) {
+        //     blokusUIController.moving(event.pageX, event.pageY);
+        // });
 
-        $(document).mousemove(function (event) {
-            blokusUIController.moving(event.pageX, event.pageY);
-        });
 
-
-        $(document).keyup(function(event){
-            switch(event.keyCode) {
-            case  81:
-                rotation();
-                break;
-            case  69:
-                symmetry();
-                break;
-        }
+        $(document).keyup(function (event) {
+            switch (event.keyCode) {
+                case  81:
+                    rotation();
+                    break;
+                case  69:
+                    symmetry();
+                    break;
+            }
         });
 
 
@@ -93,7 +93,7 @@ function BlokusUIController() {
 
         var symmetryNode = $('<div id="symmetry' + chess.name + '"  ></div>');
 
-        var rotationNode = $('<div id="rotation' + chess.name + '" onclick="clickChooseChess(\'' + chess.name + '\',event)"></div>');
+        var rotationNode = $('<div id="rotation' + chess.name + '" onclick(event)="event.stopPropagation();" onmousedown="clickChooseChess(\'' + chess.name + '\',event)"></div>');
 
         var emptyDiv = $('<div id="chooseButton' + chess.name + '" class="choose-chess-button" ></div>');
 
@@ -417,17 +417,33 @@ function BlokusUIController() {
 
 
     this.end = function () {
-        $(document).mouseup(function () {
-            // blokusUIController.mouseUp(event.pageX, event.pageY);
-        });
+        $(document).unbind('mouseup');
 
-        $(document).mousemove(function () {
-            // blokusUIController.moving(event.pageX, event.pageY);
-        });
+        $(document).unbind('mousedown');
+
+        $(document).unbind('mousemove');
+
+        $(document).unbind('click');
+
+        // $(document).mousedown(function () {
+        //     blokusUIController.mouseUp(event.pageX, event.pageY);
+        // });
+        //
+        // $(document).mousemove(function () {
+        //     // blokusUIController.moving(event.pageX, event.pageY);
+        // });
+        //
+        // $(document).click(function (event) {
+        //     // blokusUIController.mouseUp(event.pageX, event.pageY);
+        // });
 
         if (this.deadlineController != null) {
             clearInterval(this.deadlineController);
         }
+
+        $(document).unbind('keyup');
+
+
     };
 
     this.frameUpdate = function () {
@@ -462,6 +478,12 @@ function BlokusUIController() {
 
 
     this.clickChooseChess = function (chessName, event) {
+
+        $(document).mousemove(function (event) {
+            blokusUIController.moving(event.pageX, event.pageY);
+        });
+
+
         //如果不是在移动中
         if (!this.isMove) {
             this.isMove = true;
@@ -478,7 +500,18 @@ function BlokusUIController() {
         }
     };
 
+
+    // this.clickChooseChessStopPropagation = function (event) {
+    //     if (this.isMove) {
+    //         //取消点击事件的父元素传播
+    //         event.stopPropagation();
+    //     }
+    // };
+
     this.moving = function (x, y) {
+
+        console.log('mmmmmmmmm')
+
         if (this.isMove) {
             var obj = $('#combine' + this.currentChessName);
             var height = $(document).scrollTop();
@@ -490,8 +523,11 @@ function BlokusUIController() {
     };
 
     this.mouseUp = function (x, y) {
+
+        $(document).unbind('click');
+        $(document).unbind('mousemove');
         this.isMove = false;
-        var obj = $('#combine' + this.currentChessName);
+        let obj = $('#combine' + this.currentChessName);
         // obj.css({
         //     'position': 'relative',
         //     'left': '-210px',
@@ -503,12 +539,12 @@ function BlokusUIController() {
         // obj.addClass('choose-chess-button-hide');
 
         $('.chess-box-game').each(function () {
-            var obj = $(this);
-            var offset = obj.offset();
+            let obj = $(this);
+            let offset = obj.offset();
             if (x < offset.left + obj.width() && x > offset.left
                 && y < offset.top + obj.height() && y > offset.top) {
-                var xx = this.id.split('x')[0];
-                var yy = this.id.split('x')[1];
+                let xx = this.id.split('x')[0];
+                let yy = this.id.split('x')[1];
                 // blokusUIController.chessDown(x, y);
                 window.blokusUIController.chessDown(xx, yy);
                 return false;
