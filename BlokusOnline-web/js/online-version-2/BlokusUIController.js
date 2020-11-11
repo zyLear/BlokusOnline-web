@@ -39,8 +39,6 @@ function BlokusUIController() {
         // });
         $(document).click(function (event) {
             blokusUIController.mouseUp(event.pageX, event.pageY);
-            // console.log('xxxx')
-            console.log('a')
         });
 
 
@@ -48,7 +46,6 @@ function BlokusUIController() {
         $(document).mousemove(function (event) {
             blokusUIController.moving(event.pageX, event.pageY);
         });
-
 
 
         $(document).keyup(function(event){
@@ -476,7 +473,6 @@ function BlokusUIController() {
             this.abs_x = obj.width() / 2;
             this.abs_y = obj.height() / 2;
             this.moving(event.x, event.y);
-            console.log('cc');
             //取消点击事件的父元素传播
             event.stopPropagation();
         }
