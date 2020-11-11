@@ -16,7 +16,7 @@
 function BlokusUIController() {
 
 
-    this.defaulDeadline = 120;
+    this.defaulDeadline = 180;
     this.deadline = null;
 
     //每次棋局start设置
