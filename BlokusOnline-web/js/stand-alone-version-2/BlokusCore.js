@@ -33,11 +33,11 @@ function Chess(name, color, model, rotationFlag, symmetryFlag) {
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0]
         ];    //数组旋转
-        for (var i = 0; i < 5; i++)
-            for (var j = 0; j < 5; j++)
+        for (let i = 0; i < 5; i++)
+            for (let j = 0; j < 5; j++)
                 newModel[j][abs(4 - i)] = this.model[i][j];
-        for (var i = 0; i < 5; i++)
-            for (var j = 0; j < 5; j++)
+        for (let i = 0; i < 5; i++)
+            for (let j = 0; j < 5; j++)
                 this.model[i][j] = newModel[i][j];
 
         this.rotationFlag++;    //图片旋转
@@ -52,18 +52,18 @@ function Chess(name, color, model, rotationFlag, symmetryFlag) {
     }
 
     this.rotationSecond = function () {
-        var newModel = [
+        let newModel = [
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0]
         ];     //数组旋转
-        for (var i = 0; i < 5; i++)
-            for (var j = 0; j < 5; j++)
+        for (let i = 0; i < 5; i++)
+            for (let j = 0; j < 5; j++)
                 newModel[abs(4 - i)][j] = this.model[j][i];
-        for (var i = 0; i < 5; i++)
-            for (var j = 0; j < 5; j++)
+        for (let i = 0; i < 5; i++)
+            for (let j = 0; j < 5; j++)
                 this.model[i][j] = newModel[i][j];
 
         this.rotationFlag++;    //图片旋转

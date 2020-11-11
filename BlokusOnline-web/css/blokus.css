@@ -308,19 +308,21 @@ input:checked + div {
 
 .button-custom {
     /*background-color: #4CAF50; !* Green *!*/
-    border: none;
+    /*border: none;*/
     color: royalblue;
     padding: 15px 35px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    margin: 12px 28px;
+    margin: 10px 3px;
     font-family: Verdana, Genva, Arial, sans-serif;
     font-size: 20px;
     font-style: inherit;
     /*font-weight:bold;*/
     font-weight: bold;
     cursor: pointer;
+    border-radius: 10px;
+    /*border: 1px solid #959a9a;*/
 
 }
 
@@ -384,7 +386,7 @@ input:checked + div {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     margin: 4px;
     padding: 2px;
-    min-height: 50%;
+    min-height: 55%;
 }
 
 

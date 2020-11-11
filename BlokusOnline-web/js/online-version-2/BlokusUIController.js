@@ -42,6 +42,20 @@ function BlokusUIController() {
             blokusUIController.moving(event.pageX, event.pageY);
         });
 
+
+
+        $(document).keyup(function(event){
+            switch(event.keyCode) {
+            case  81:
+                rotation();
+                break;
+            case  69:
+                symmetry();
+                break;
+        }
+        });
+
+
         if (this.deadlineController != null) {
             clearInterval(this.deadlineController);
         }
@@ -64,7 +78,7 @@ function BlokusUIController() {
         playerList.forEach(function (e) {
             blokusUIController.playerNameMap.set(e.color, e.account);
         });
-
+        this.currentChessName = '';
 
     };
 
@@ -230,7 +244,7 @@ function BlokusUIController() {
         model10[3] = [0, 0, 1, 1, 0];
         model10[4] = [0, 0, 0, 0, 0];
         var name10 = color + '_' + 10;
-        var chess10 = new Chess(name4, color, model10, 0, 0);
+        var chess10 = new Chess(name10, color, model10, 0, 0);
         this.formChooseChess(chess10);
         chessMap.set(name10, chess10);
 
@@ -307,7 +321,7 @@ function BlokusUIController() {
         model17[3] = [0, 0, 0, 0, 0];
         model17[4] = [0, 0, 0, 0, 0];
         var name17 = color + '_' + 17;
-        var chess17 = new Chess(name4, color, model17, 0, 0);
+        var chess17 = new Chess(name17, color, model17, 0, 0);
         this.formChooseChess(chess17);
         chessMap.set(name17, chess17);
 
